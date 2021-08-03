@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+  <code>autocalc_price_option</code>
+  <name>Обновление цены при выборе опций OC2 (без AJAX)</name>
+  <version>3.0.11</version>
+  <author>mpn2005</author>
+  
+  <file path="admin/view/template/setting/setting.tpl">
+    <operation error="skip">                           
+      <search><![CDATA[<label class="col-sm-2 control-label"><span data-toggle="tooltip" title="<?php echo $help_currency_auto; ?>"><?php echo $entry_currency_auto; ?></span></label>]]></search>
+      <add position="before"><![CDATA[
+          <label class="col-sm-2 control-label" for="input-currency"><span data-toggle="tooltip" title="Выводится модулем autocalc_price_option в карточке товара">Дополнительная валюта <i>(autocalc)</i>:</span></label>
+          <div class="col-sm-10">
+            <select name="config_currency2" id="input-currency" class="form-control">
+              <option value=""><?php echo $text_none; ?></option>
+              <?php foreach ($currencies as $currency) { ?>
+              <?php if ($currency['code'] == $config_currency2) { ?>
+              <option value="<?php echo $currency['code']; ?>" selected="selected"><?php echo $currency['title']; ?></option>
+              <?php } else { ?>
+              <option value="<?php echo $currency['code']; ?>"><?php echo $currency['title']; ?></option>
+              <?php } ?>
+              <?php } ?>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="input-currency"><span data-toggle="tooltip" title="Акция на опции пропорционально акции на товар (autocalc_price_option)">Акция на опции <i>(autocalc)</i>:</span></label>
+          <div class="col-sm-10">
+            <label class="radio-inline">
+              <?php if ($config_autocalc_option_special) { ?>
+              <input type="radio" name="config_autocalc_option_special" value="1" checked="checked" />
+              <?php echo $text_yes; ?>
+              <?php } else { ?>
+              <input type="radio" name="config_autocalc_option_special" value="1" />
+              <?php echo $text_yes; ?>
+              <?php } ?>
+            </label>
+            <label class="radio-inline">
+              <?php if (!$config_autocalc_option_special) { ?>
+              <input type="radio" name="config_autocalc_option_special" value="0" checked="checked" />
+              <?php echo $text_no; ?>
+              <?php } else { ?>
+              <input type="radio" name="config_autocalc_option_special" value="0" />
+              <?php echo $text_no; ?>
+              <?php } ?>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="input-currency"><span data-toggle="tooltip" title="Скидка на опции пропорционально скидке на товар (autocalc_price_option)">Скидка на опции <i>(autocalc)</i>:</span></label>
+          <div class="col-sm-10">
+            <label class="radio-inline">
+              <?php if ($config_autocalc_option_discount) { ?>
+              <input type="radio" name="config_autocalc_option_discount" value="1" checked="checked" />
+              <?php echo $text_yes; ?>
+              <?php } else { ?>
+              <input type="radio" name="config_autocalc_option_discount" value="1" />
+              <?php echo $text_yes; ?>
+              <?php } ?>
+            </label>
+            <label class="radio-inline">
+              <?php if (!$config_autocalc_option_discount) { ?>
+              <input type="radio" name="config_autocalc_option_discount" value="0" checked="checked" />
+              <?php echo $text_no; ?>
+              <?php } else { ?>
+              <input type="radio" name="config_autocalc_option_discount" value="0" />
+              <?php echo $text_no; ?>
+              <?php } ?>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="input-currency"><span data-toggle="tooltip" title="Отключении функции умножения на количество (autocalc_price_option)">Не умножать на количество <i>(autocalc)</i>:</span></label>
+          <div class="col-sm-10">
+            <label class="radio-inline">
+              <?php if ($config_autocalc_not_mul_qty) { ?>
+              <input type="radio" name="config_autocalc_not_mul_qty" value="1" checked="checked" />
+              <?php echo $text_yes; ?>
+              <?php } else { ?>
+              <input type="radio" name="config_autocalc_not_mul_qty" value="1" />
+              <?php echo $text_yes; ?>
+              <?php } ?>
+            </label>
+            <label class="radio-inline">
+              <?php if (!$config_autocalc_not_mul_qty) { ?>
+              <input type="radio" name="config_autocalc_not_mul_qty" value="0" checked="checked" />
+              <?php echo $text_no; ?>
+              <?php } else { ?>
+              <input type="radio" name="config_autocalc_not_mul_qty" value="0" />
+              <?php echo $text_no; ?>
+              <?php } ?>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="input-currency"><span data-toggle="tooltip" title="Автоматический выбор первой опции (radio,select). (autocalc_price_option)">Выбор первой опции <i>(autocalc)</i>:</span></label>
+          <div class="col-sm-10">
+            <label class="radio-inline">
+              <?php if ($config_autocalc_select_first) { ?>
+              <input type="radio" name="config_autocalc_select_first" value="1" checked="checked" />
+              <?php echo $text_yes; ?>
+              <?php } else { ?>
+              <input type="radio" name="config_autocalc_select_first" value="1" />
+              <?php echo $text_yes; ?>
+              <?php } ?>
+            </label>
+            <label class="radio-inline">
+              <?php if (!$config_autocalc_select_first) { ?>
+              <input type="radio" name="config_autocalc_select_first" value="0" checked="checked" />
+              <?php echo $text_no; ?>
+              <?php } else { ?>
+              <input type="radio" name="config_autocalc_select_first" value="0" />
+              <?php echo $text_no; ?>
+              <?php } ?>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+      ]]></add>
+    </operation>        
+  </file>  
+  <file path="admin/controller/setting/setting.php">
+    <operation>                           
+      <search><![CDATA[if (isset($this->request->post['config_currency'])) {]]></search>
+      <add position="before"><![CDATA[
+        if (isset($this->request->post['config_currency2'])) {
+            $data['config_currency2'] = $this->request->post['config_currency2'];
+        } else {
+            $data['config_currency2'] = $this->config->get('config_currency2');
+        }
+        if (isset($this->request->post['config_autocalc_option_special'])) {
+            $data['config_autocalc_option_special'] = $this->request->post['config_autocalc_option_special'];
+        } else {
+            $data['config_autocalc_option_special'] = $this->config->get('config_autocalc_option_special');
+        }        
+        if (isset($this->request->post['config_autocalc_option_discount'])) {
+            $data['config_autocalc_option_discount'] = $this->request->post['config_autocalc_option_discount'];
+        } else {
+            $data['config_autocalc_option_discount'] = $this->config->get('config_autocalc_option_discount');
+        }
+        if (isset($this->request->post['config_autocalc_not_mul_qty'])) {
+            $data['config_autocalc_not_mul_qty'] = $this->request->post['config_autocalc_not_mul_qty'];
+        } else {
+            $data['config_autocalc_not_mul_qty'] = $this->config->get('config_autocalc_not_mul_qty');
+        }
+        if (isset($this->request->post['config_autocalc_select_first'])) {
+            $data['config_autocalc_select_first'] = $this->request->post['config_autocalc_select_first'];
+        } else {
+            $data['config_autocalc_select_first'] = $this->config->get('config_autocalc_select_first');
+        }
+      ]]></add>
+    </operation>        
+  </file>
+  
+  
+  <file path="catalog/controller/product/category.php">
+    <operation>                           
+      <search><![CDATA[$price = $this->currency->format(]]></search>
+      <add position="after"><![CDATA[
+        if ($this->currency->has($this->config->get('config_currency2')) && ($this->config->get('config_currency2') != $this->session->data['currency'])) {
+            $price .= ' (' . $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->config->get('config_currency2')) . ')';
+        }
+      ]]></add>
+    </operation>    
+    <operation>                           
+      <search><![CDATA[$special = $this->currency->format(]]></search>
+      <add position="after"><![CDATA[
+        if ($this->currency->has($this->config->get('config_currency2')) && ($this->config->get('config_currency2') != $this->session->data['currency'])) {
+            $special .= ' (' . $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->config->get('config_currency2')) . ')';
+        }
+      ]]></add>
+    </operation>
+  </file>
+
+
+  <file path="catalog/view/theme/*/template/product/{product,aridius_quickview}.tpl"> 
+    <operation error="skip">
+      <search><![CDATA[<?php echo $option_value['price_prefix']; ?><?php echo $option_value['price']; ?>]]></search>
+      <add position="replace"><![CDATA[<?php echo ($option_value['price_prefix'] == '+' || $option_value['price_prefix'] == '-' ? $option_value['price_prefix'] : '') . $option_value['price']; ?>]]></add>
+    </operation>
+  </file>
+  
+  <file path="catalog/view/theme/*/template/product/{product,aridius_quickview}.tpl"> 
+    <operation>
+         <search><![CDATA[value="<?php echo $option_value['product_option_value_id']; ?>"]]></search>
+      <add position="replace"><![CDATA[value="<?php echo $option_value['product_option_value_id']; ?>" data-points="<?php echo (isset($option_value['points_value']) ? $option_value['points_value'] : 0); ?>" data-prefix="<?php echo $option_value['price_prefix']; ?>" data-price="<?php echo $option_value['price_value']; ?>"]]></add>
+    </operation>
+    <operation>
+       <search><![CDATA[
+	  <!-- rating -->
+	  ]]></search>
+      <add position="before"><![CDATA[
+<script><!--
+function price_format(price)
+{ 
+    c = <?php echo (empty($autocalc_currency['decimals']) ? "0" : $autocalc_currency['decimals'] ); ?>;
+    d = '<?php echo $autocalc_currency['decimal_point']; ?>'; // decimal separator
+    t = '<?php echo $autocalc_currency['thousand_point']; ?>'; // thousands separator
+    s_left = '<?php echo str_replace("'", "\'", $autocalc_currency['symbol_left']); ?>';
+    s_right = '<?php echo str_replace("'", "\'", $autocalc_currency['symbol_right']); ?>';
+    n = price * <?php echo $autocalc_currency['value']; ?>;
+    i = parseInt(n = Math.abs(n).toFixed(c)) + ''; 
+    j = ((j = i.length) > 3) ? j % 3 : 0; 
+    price_text = s_left + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '') + s_right; 
+    
+    <?php if (!empty($autocalc_currency2)) { ?>
+    c = <?php echo (empty($autocalc_currency2['decimals']) ? "0" : $autocalc_currency2['decimals'] ); ?>;
+    d = '<?php echo $autocalc_currency2['decimal_point']; ?>'; // decimal separator
+    t = '<?php echo $autocalc_currency2['thousand_point']; ?>'; // thousands separator
+    s_left = '<?php echo str_replace("'", "\'", $autocalc_currency2['symbol_left']); ?>';
+    s_right = '<?php echo str_replace("'", "\'", $autocalc_currency2['symbol_right']); ?>';
+    n = price * <?php echo $autocalc_currency2['value']; ?>;
+    i = parseInt(n = Math.abs(n).toFixed(c)) + ''; 
+    j = ((j = i.length) > 3) ? j % 3 : 0; 
+    price_text += '  <span class="currency2">(' + s_left + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '') + s_right + ')</span>'; 
+    <?php } ?>
+    
+    return price_text;
+}
+
+function calculate_tax(price)
+{
+    <?php // Process Tax Rates
+      if (isset($tax_rates) && $tax) {
+         foreach ($tax_rates as $tax_rate) {
+           if ($tax_rate['type'] == 'F') {
+             echo 'price += '.$tax_rate['rate'].';';
+           } elseif ($tax_rate['type'] == 'P') {
+             echo 'price += (price * '.$tax_rate['rate'].') / 100.0;';
+           }
+         }
+      }
+    ?>
+    return price;
+}
+
+function process_discounts(price, quantity)
+{
+    <?php
+      foreach ($dicounts_unf as $discount) {
+        echo 'if ((quantity >= '.$discount['quantity'].') && ('.$discount['price'].' < price)) price = '.$discount['price'].';'."\n";
+      }
+    ?>
+    return price;
+}
+
+
+animate_delay = 20;
+
+main_price_final = calculate_tax(<?php echo $price_value; ?>);
+main_price_start = calculate_tax(<?php echo $price_value; ?>);
+main_step = 0;
+main_timeout_id = 0;
+
+function animateMainPrice_callback() {
+    main_price_start += main_step;
+    
+    if ((main_step > 0) && (main_price_start > main_price_final)){
+        main_price_start = main_price_final;
+    } else if ((main_step < 0) && (main_price_start < main_price_final)) {
+        main_price_start = main_price_final;
+    } else if (main_step == 0) {
+        main_price_start = main_price_final;
+    }
+    
+    $('.autocalc-product-price').html( price_format(main_price_start) );
+    
+    if (main_price_start != main_price_final) {
+        main_timeout_id = setTimeout(animateMainPrice_callback, animate_delay);
+    }
+}
+
+function animateMainPrice(price) {
+    main_price_start = main_price_final;
+    main_price_final = price;
+    main_step = (main_price_final - main_price_start) / 10;
+    
+    clearTimeout(main_timeout_id);
+    main_timeout_id = setTimeout(animateMainPrice_callback, animate_delay);
+}
+
+
+<?php if ($special) { ?>
+
+
+saving_price_final = calculate_tax(<?php echo $saving_value; ?>);
+saving_price_start = calculate_tax(<?php echo $saving_value; ?>);
+saving_step = 0;
+main_timeout_id2 = 0;
+function animateSavingPrice_callback() {
+    saving_price_start += saving_step;
+    if ((saving_step > 0) && (saving_price_start > saving_price_final)){
+        saving_price_start = saving_price_final;
+    } else if ((saving_step < 0) && (saving_price_start < saving_price_final)) {
+        saving_price_start = saving_price_final;
+    } else if (saving_step == 0) {
+        saving_price_start = saving_price_final;
+    }
+    $('.autocalc-saving-price').html( price_format(saving_price_start) );
+    if (saving_price_start != saving_price_final) {
+        main_timeout_id2 = setTimeout(animateSavingPrice_callback, animate_delay);
+    }
+}
+function animateMainPrice2(price) {
+    saving_price_start = saving_price_final;
+    saving_price_final = price;
+    saving_step = (saving_price_final - saving_price_start) / 10;
+    clearTimeout(main_timeout_id2);
+    main_timeout_id2 = setTimeout(animateSavingPrice_callback, animate_delay);
+}
+
+special_price_final = calculate_tax(<?php echo $special_value; ?>);
+special_price_start = calculate_tax(<?php echo $special_value; ?>);
+special_step = 0;
+special_timeout_id = 0;
+
+function animateSpecialPrice_callback() {
+    special_price_start += special_step;
+    
+    if ((special_step > 0) && (special_price_start > special_price_final)){
+        special_price_start = special_price_final;
+    } else if ((special_step < 0) && (special_price_start < special_price_final)) {
+        special_price_start = special_price_final;
+    } else if (special_step == 0) {
+        special_price_start = special_price_final;
+    }
+    
+    $('.autocalc-product-special').html( price_format(special_price_start) );
+    
+    if (special_price_start != special_price_final) {
+        special_timeout_id = setTimeout(animateSpecialPrice_callback, animate_delay);
+    }
+}
+
+function animateSpecialPrice(price) {
+    special_price_start = special_price_final;
+    special_price_final = price;
+    special_step = (special_price_final - special_price_start) / 10;
+    
+    clearTimeout(special_timeout_id);
+    special_timeout_id = setTimeout(animateSpecialPrice_callback, animate_delay);
+}
+<?php } ?>
+
+
+function recalculateprice()
+{
+    var main_price = <?php echo (float)$price_value; ?>;
+	var saving_price = <?php echo (float)$saving_value; ?>;
+    var input_quantity = Number($('input[name="quantity"]').val());
+    var special = <?php echo (float)$special_value; ?>;
+    var tax = 0;
+    discount_coefficient = 1;
+    
+    if (isNaN(input_quantity)) input_quantity = 0;
+    
+    <?php if ($special) { ?>
+        special_coefficient = <?php echo ((float)$price_value/(float)$special_value); ?>;
+    <?php } else { ?>
+        <?php if (empty($autocalc_option_discount)) { ?>
+            main_price = process_discounts(main_price, input_quantity);
+            tax = process_discounts(tax, input_quantity);
+        <?php } else { ?>
+            if (main_price) discount_coefficient = process_discounts(main_price, input_quantity) / main_price;
+        <?php } ?>
+    <?php } ?>
+    
+    
+    var option_price = 0;
+    
+    <?php if ($points) { ?>
+      var points = <?php echo (float)$points_value; ?>;
+      $('input:checked,option:selected').each(function() {
+          if ($(this).data('points')) points += Number($(this).data('points'));
+      });
+      $('.autocalc-product-points').html(points);
+    <?php } ?>
+    
+    $('input:checked,option:selected').each(function() {
+      if ($(this).data('prefix') == '=') {
+        option_price += Number($(this).data('price'));
+        main_price = 0;
+        special = 0;
+      }
+    });
+    
+    $('input:checked,option:selected').each(function() {
+      if ($(this).data('prefix') == '+') {
+        option_price += Number($(this).data('price'));
+      }
+      if ($(this).data('prefix') == '-') {
+        option_price -= Number($(this).data('price'));
+      }
+      if ($(this).data('prefix') == 'u') {
+        pcnt = 1.0 + (Number($(this).data('price')) / 100.0);
+        option_price *= pcnt;
+        main_price *= pcnt;
+        special *= pcnt;
+      }
+      if ($(this).data('prefix') == 'd') {
+        pcnt = 1.0 - (Number($(this).data('price')) / 100.0);
+        option_price *= pcnt;
+        main_price *= pcnt;
+        special *= pcnt;
+      }
+      if ($(this).data('prefix') == '*') {
+        option_price *= Number($(this).data('price'));
+        main_price *= Number($(this).data('price'));
+        special *= Number($(this).data('price'));
+      }
+      if ($(this).data('prefix') == '/') {
+        option_price /= Number($(this).data('price'));
+        main_price /= Number($(this).data('price'));
+        special /= Number($(this).data('price'));
+      }
+    });
+    
+    special += option_price;
+    main_price += option_price;
+
+    <?php if ($special) { ?>
+      <?php if (empty($autocalc_option_special))  { ?>
+        main_price = special * special_coefficient;
+		 saving_price = main_price - special;
+      <?php } else { ?>
+        special = main_price / special_coefficient;
+		saving_price = main_price - special;
+      <?php } ?>
+      tax = special;
+    <?php } else { ?>
+      <?php if (!empty($autocalc_option_discount)) { ?>
+          main_price *= discount_coefficient;
+      <?php } ?>
+      tax = main_price;
+    <?php } ?>
+    
+    // Process TAX.
+    main_price = calculate_tax(main_price);
+	  saving_price = calculate_tax(saving_price);
+    special = calculate_tax(special);
+    
+    <?php if (!$autocalc_not_mul_qty) { ?>
+    if (input_quantity > 0) {
+      main_price *= input_quantity;
+      special *= input_quantity;
+	   saving_price *= input_quantity;
+      tax *= input_quantity;
+    }
+    <?php } ?>
+
+    // Display Main Price
+    animateMainPrice(main_price);
+      
+    <?php if ($special) { ?>
+	animateMainPrice2(saving_price);
+      animateSpecialPrice(special);
+    <?php } ?>
+}
+
+$(document).ready(function() {
+    $('input[type="checkbox"]').bind('change', function() { recalculateprice(); });
+    $('input[type="radio"]').bind('change', function() { recalculateprice(); });
+    $('select').bind('change', function() { recalculateprice(); });
+    
+    $quantity = $('input[name="quantity"]');
+    $quantity.data('val', $quantity.val());
+    (function() {
+        if ($quantity.val() != $quantity.data('val')){
+            $quantity.data('val',$quantity.val());
+            recalculateprice();
+        }
+        setTimeout(arguments.callee, 250);
+    })();
+
+    <?php if ($autocalc_select_first) { ?>
+    $('select[name^="option"] option[value=""]').remove();
+    last_name = '';
+    $('input[type="radio"][name^="option"]').each(function(){
+        if ($(this).attr('name') != last_name) $(this).prop('checked', true);
+        last_name = $(this).attr('name');
+    });
+	
+	    $('input[type="checkbox"][name^="option"]').each(function(){
+        if ($(this).attr('name') != last_name) $(this).prop('checked', true);
+        last_name = $(this).attr('name');
+    });
+	
+    <?php } ?>
+    
+    recalculateprice();
+});
+
+//--></script>
+      ]]></add>
+    </operation>
+  </file>
+
+  <file path="catalog/model/catalog/product.php">
+    <operation>
+      <search><![CDATA['weight'                  => $product_option_value['weight'],]]></search>
+      <add position="before"><![CDATA[
+          'points'        => $product_option_value['points'],
+          'points_prefix' => $product_option_value['points_prefix'],
+      ]]></add>
+    </operation>
+  </file>
+  
+  <file path="catalog/controller/product/product.php">
+    <operation>
+      <search><![CDATA[$data['options'] = array();]]></search>
+      <add position="before"><![CDATA[
+          $data['raw_price'] = $data['price'];
+          $data['raw_special'] = $data['special'];
+        
+          if ($data['price']) {
+              $data['price'] = '<span class=\'autocalc-product-price\'>' . $data['price'] . '</span>';
+          }
+          if ($data['special']) {
+              $data['special'] = '<span class=\'autocalc-product-special\'>' . $data['special'] . '</span>';
+          }
+          if ($data['points']) {
+              $data['points'] = '<span class=\'autocalc-product-points\'>' . $data['points'] . '</span>';
+          }
+          
+          $data['price_value'] = $product_info['price'];
+          $data['special_value'] = $product_info['special'];
+          $data['tax_value'] = (float)$product_info['special'] ? $product_info['special'] : $product_info['price'];
+          $data['points_value'] = $product_info['points'];
+		  
+         
+		  if ((float)$product_info['special']) {
+				 $data['saving_value'] = $product_info['price'] - $product_info['special'];
+			} else {
+				$data['saving_value'] = false;
+			}
+		  
+          $var_currency = array();
+          $currency_code = !empty($this->session->data['currency']) ? $this->session->data['currency'] : $this->config->get('config_currency');
+          $var_currency['value'] = $this->currency->getValue($currency_code);
+          $var_currency['symbol_left'] = $this->currency->getSymbolLeft($currency_code);
+          $var_currency['symbol_right'] = $this->currency->getSymbolRight($currency_code);
+          $var_currency['decimals'] = $this->currency->getDecimalPlace($currency_code);
+          $var_currency['decimal_point'] = $this->language->get('decimal_point');
+          $var_currency['thousand_point'] = $this->language->get('thousand_point');
+          $data['autocalc_currency'] = $var_currency;
+
+          $currency2_code = $this->config->get('config_currency2');
+          if ($this->currency->has($currency2_code) && $currency2_code != $currency_code) {
+              $var_currency = array();
+              $currency_code = $currency2_code;
+              $var_currency['value'] = $this->currency->getValue($currency_code);
+              $var_currency['symbol_left'] = $this->currency->getSymbolLeft($currency_code);
+              $var_currency['symbol_right'] = $this->currency->getSymbolRight($currency_code);
+              $var_currency['decimals'] = $this->currency->getDecimalPlace($currency_code);
+              $var_currency['decimal_point'] = $this->language->get('decimal_point');
+              $var_currency['thousand_point'] = $this->language->get('thousand_point');
+              $data['autocalc_currency2'] = $var_currency;
+          }
+          
+          $data['dicounts_unf'] = $discounts;
+
+          $data['tax_class_id'] = $product_info['tax_class_id'];
+          $data['tax_rates'] = $this->tax->getRates(0, $product_info['tax_class_id']);
+        
+          $data['autocalc_option_special'] = $this->config->get('config_autocalc_option_special');
+          $data['autocalc_option_discount'] = $this->config->get('config_autocalc_option_discount');
+          $data['autocalc_not_mul_qty'] = $this->config->get('config_autocalc_not_mul_qty');
+          $data['autocalc_select_first'] = $this->config->get('config_autocalc_select_first');
+      ]]></add>
+    </operation>
+    <operation>
+      <search><![CDATA[$product_option_value_data[] = array(]]></search>
+      <add position="after"><![CDATA[
+          'price_value'                   => $option_value['price'],
+          'points_value'                  => intval($option_value['points_prefix'].$option_value['points']),
+      ]]></add>
+    </operation>
+  </file>
+
+  
+
+  
+  <file path="system/library/cart.php">    
+    <operation>
+      <search><![CDATA[if ($product_discount_query->num_rows) {]]></search>
+      <add position="after"><![CDATA[
+        if ((float)$product_discount_query->row['price'] && (float)$product_query->row['price'] && $this->config->get('config_autocalc_option_discount')) {
+          $discount_coefficient = (float)$product_discount_query->row['price'] / (float)$product_query->row['price'];
+          if (isset($option_price_arr) && is_array($option_price_arr)) {
+            foreach($option_price_arr as $key1=>$operations){
+              foreach($operations as $operation=>$value){
+                if (($operation == '+' || $operation == '-' || $operation == '=')) {
+                  $option_price_arr[$key1][$operation] = $value * $discount_coefficient;
+                }
+              }
+            }
+          } else if (is_array($option_price)) {
+            foreach($option_price as $key1=>$operations){
+              foreach($operations as $operation=>$value){
+                if (($operation == '+' || $operation == '-' || $operation == '=')) {
+                  $option_price[$key1][$operation] = $value * $discount_coefficient;
+                }
+              }
+            }
+          } else {
+            $option_price *= $discount_coefficient;
+          }
+        }
+      ]]></add>
+    </operation>
+    <operation>
+      <search><![CDATA[if ($product_special_query->num_rows) {]]></search>
+      <add position="after"><![CDATA[
+        if ($product_special_query->row['price'] > 0.0 && $this->config->get('config_autocalc_option_special')) {
+          $special_koefficient = (float)$product_query->row['price'] / (float)$product_special_query->row['price'];
+          if (isset($option_price_arr) && is_array($option_price_arr)) {
+            foreach($option_price_arr as $key1=>$operations){
+              foreach($operations as $operation=>$value){
+                if (($operation == '+' || $operation == '-' || $operation == '=') && (float)$special_koefficient ) {
+                  $option_price_arr[$key1][$operation] = $value / $special_koefficient;
+                }
+              }
+            }
+          } else if (is_array($option_price)) {
+            foreach($option_price as $key1=>$operations){
+              foreach($operations as $operation=>$value){
+                if (($operation == '+' || $operation == '-' || $operation == '=') && (float)$special_koefficient ) {
+                  $option_price[$key1][$operation] = $value / $special_koefficient;
+                }
+              }
+            }
+          } else if ((float)$special_koefficient) {
+            $option_price /= $special_koefficient;
+          }
+        }
+      ]]></add>
+    </operation>
+  </file>
+  <file path="system/library/cart/cart.php">    
+    <operation>
+      <search><![CDATA[if ($product_discount_query->num_rows) {]]></search>
+      <add position="after"><![CDATA[
+        if ((float)$product_discount_query->row['price'] && (float)$product_query->row['price'] && $this->config->get('config_autocalc_option_discount')) {
+          $discount_coefficient = (float)$product_discount_query->row['price'] / (float)$product_query->row['price'];
+          if (isset($option_price_arr) && is_array($option_price_arr)) {
+            foreach($option_price_arr as $key1=>$operations){
+              foreach($operations as $operation=>$value){
+                if (($operation == '+' || $operation == '-' || $operation == '=')) {
+                  $option_price_arr[$key1][$operation] = $value * $discount_coefficient;
+                }
+              }
+            }
+          } else if (is_array($option_price)) {
+            foreach($option_price as $key1=>$operations){
+              foreach($operations as $operation=>$value){
+                if (($operation == '+' || $operation == '-' || $operation == '=')) {
+                  $option_price[$key1][$operation] = $value * $discount_coefficient;
+                }
+              }
+            }
+          } else {
+            $option_price *= $discount_coefficient;
+          }
+        }
+      ]]></add>
+    </operation>
+    <operation>
+      <search><![CDATA[if ($product_special_query->num_rows) {]]></search>
+      <add position="after"><![CDATA[
+        if ($product_special_query->row['price'] > 0.0 && $this->config->get('config_autocalc_option_special')) {
+          $special_koefficient = (float)$product_query->row['price'] / (float)$product_special_query->row['price'];
+          if (isset($option_price_arr) && is_array($option_price_arr)) {
+            foreach($option_price_arr as $key1=>$operations){
+              foreach($operations as $operation=>$value){
+                if (($operation == '+' || $operation == '-' || $operation == '=') && (float)$special_koefficient ) {
+                  $option_price_arr[$key1][$operation] = $value / $special_koefficient;
+                }
+              }
+            }
+          } else if (is_array($option_price)) {
+            foreach($option_price as $key1=>$operations){
+              foreach($operations as $operation=>$value){
+                if (($operation == '+' || $operation == '-' || $operation == '=') && (float)$special_koefficient ) {
+                  $option_price[$key1][$operation] = $value / $special_koefficient;
+                }
+              }
+            }
+          } else if ((float)$special_koefficient) {
+            $option_price /= $special_koefficient;
+          }
+        }
+      ]]></add>
+    </operation>
+  </file>
+
+</modification>

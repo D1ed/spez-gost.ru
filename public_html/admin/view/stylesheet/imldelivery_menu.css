@@ -1,0 +1,91 @@
+.request-iml
+{
+  font-size: 14px;;
+}
+
+
+/*.request-iml  div.ext_options div
+ .request-iml .ext_options div 
+{
+  margin-bottom: 10px;
+}*/
+
+.request-iml input[type="text"], .request-iml select
+{
+  
+  width: 280px;
+}
+
+.request-iml textarea
+{
+  width: 500px;
+}
+
+
+.request-iml select[name="VAT"]
+{
+  width: 75px;
+}
+
+.request-iml input.button-primary.select-pvz-on-map,
+.request-iml input.button-primary.recalc-delivery-cost
+{
+  margin-left: 50px;
+}
+
+
+
+/*.disabled-button
+{
+  background: #80808091;
+  cursor: unset;
+}
+*/
+
+.request-iml .placesTable > tbody > tr >  th, .placesTable > tbody > tr > td
+{
+  width: 80px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.request-iml .placesTable input
+{
+  width: 100px;
+}
+
+</style>
+<style media="screen">
+.pvz_selector
+{
+  margin-top: 20px;
+}
+.iml-map-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: calc(50% - 275px + 10px);
+  left: calc(50% - 325px);
+  overflow: auto;
+  border: 1px solid #b5aeae;
+}
+
+.iml-map-modal .bar
+{
+  height: 20px;
+  background: #b5aeae;
+  color: white;
+}
+.iml-map-modal .bar .close-btn
+{
+  /* border: 1px solid gray; */
+  float: right;
+  height: 100%;
+  width: 20px;
+  cursor: pointer;
+}
+
+input[name="Amount"]
+{
+  background-color: #eaeaea;
+}

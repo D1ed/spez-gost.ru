@@ -1,0 +1,369 @@
+# Copyright (C) 2014 Charlie MERLAND
+# This file is distributed under the GNU GPL V3.
+msgid ""
+msgstr ""
+"Project-Id-Version: WPMedium 1.5\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tags/WPMedium\n"
+"POT-Creation-Date: 2014-05-21 09:55:22+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: archive.php:29 index.php:49
+msgid "%d Post"
+msgid_plural "%d Posts"
+msgstr[0] ""
+msgstr[1] ""
+
+#: archive.php:30
+msgid "Posted On %s %s"
+msgstr ""
+
+#: archive.php:43 functions.php:1042
+msgid "Prev page"
+msgstr ""
+
+#: archive.php:43 functions.php:1042
+msgid "Next page"
+msgstr ""
+
+#: comments.php:9
+msgid "One thought on %2$s"
+msgid_plural "%1$s thoughts on %2$s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:16
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:17
+msgid "Older Comments"
+msgstr ""
+
+#: comments.php:18
+msgid "Newer Comments"
+msgstr ""
+
+#: comments.php:23
+msgid "Comments are closed"
+msgstr ""
+
+#: content-archive.php:12 content-page.php:12 content-single.php:12
+#: content.php:11
+msgid "Permalink to %s"
+msgstr ""
+
+#: content-none.php:5
+msgid "No posts"
+msgstr ""
+
+#: content-none.php:9
+msgid "Get Started %s"
+msgstr ""
+
+#: content-none.php:13
+msgid "Nothing Found"
+msgstr ""
+
+#: content-none.php:17
+msgid "No Results Found"
+msgstr ""
+
+#: content-none.php:24 content-none.php:28
+msgid "Coming soon"
+msgstr ""
+
+#: content-page.php:18 content-single.php:18
+msgid "Pages:"
+msgstr ""
+
+#: content-page.php:30 content-single.php:38 page.php:27 single.php:27
+msgid "Published"
+msgstr ""
+
+#: content-page.php:36 content-single.php:44
+msgid "Show Comments"
+msgstr ""
+
+#: content-page.php:37 content-single.php:45
+msgid "Hide Comments"
+msgstr ""
+
+#: content-single.php:23
+msgid "This post also appears in"
+msgstr ""
+
+#: functions.php:38 functions.php:133
+msgid "Footer Sidebar"
+msgstr ""
+
+#: functions.php:50
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php:71
+msgctxt "header image description"
+msgid "WPMedium"
+msgstr ""
+
+#: functions.php:120
+msgid "Header Sidebar"
+msgstr ""
+
+#: functions.php:122
+msgid ""
+"Add Widgets to your blog's header. Useful to include a Flattr button for "
+"instance."
+msgstr ""
+
+#: functions.php:135
+msgid ""
+"Add Widgets to your Blog Footer. You need to activate the Widget Zone in the "
+"Footer section of the Theme Customizer."
+msgstr ""
+
+#: functions.php:361 functions.php:1042
+msgid "Load More"
+msgstr ""
+
+#: functions.php:613
+msgid "By %s"
+msgstr ""
+
+#: functions.php:619
+msgid "In"
+msgstr ""
+
+#: functions.php:622
+msgid "Edit"
+msgstr ""
+
+#: functions.php:978 functions.php:982 functions.php:1011 functions.php:1015
+msgid "Newest"
+msgstr ""
+
+#: functions.php:979 functions.php:983 functions.php:1012 functions.php:1016
+msgid "Oldest"
+msgstr ""
+
+#: functions.php:1085 functions.php:1098
+msgid "Permalink for &laquo; %s &raquo;"
+msgstr ""
+
+#: functions.php:1258
+msgid "WPMedium Theme Options"
+msgstr ""
+
+#: functions.php:1286
+msgid "Facebook Profile"
+msgstr ""
+
+#: functions.php:1290
+msgid "Twitter Profile"
+msgstr ""
+
+#: functions.php:1294
+msgid "Google+ Profile"
+msgstr ""
+
+#: functions.php:1302
+msgid "Social Settings"
+msgstr ""
+
+#: functions.php:1328
+msgid "Custom Social Networks"
+msgstr ""
+
+#: functions.php:1337 functions.php:1343
+msgid "Custom Profile #%d"
+msgstr ""
+
+#: functions.php:1357
+msgid ""
+"WPMedium default social icons (Facebook, Twitter, Google+) are from the "
+"<strong>Gentleface Toolbar Icon Set</strong> icon set by Gentleface. You can "
+"download the set <a href=\"http://www.gentleface.com/free_icon_set.html"
+"\">here</a>."
+msgstr ""
+
+#: functions.php:1380
+msgid "Profile Link"
+msgstr ""
+
+#: functions.php:1381
+msgid "Custom Icon"
+msgstr ""
+
+#: functions.php:1408
+msgid "Proudly Powered By"
+msgstr ""
+
+#: functions.php:1408
+msgid "Theme"
+msgstr ""
+
+#: functions.php:1408
+msgid "By"
+msgstr ""
+
+#: functions.php:1415
+msgid "W Background Color"
+msgstr ""
+
+#: functions.php:1419
+msgid "Text Color"
+msgstr ""
+
+#: functions.php:1423
+msgid "Header Overlay Color"
+msgstr ""
+
+#: functions.php:1427
+msgid "Header Sidebar Color"
+msgstr ""
+
+#: functions.php:1432
+msgid "Title Color"
+msgstr ""
+
+#: functions.php:1433
+msgid "Title Hover Color"
+msgstr ""
+
+#: functions.php:1437
+msgid "Site Menu Background Color"
+msgstr ""
+
+#: functions.php:1442
+msgid "Link Color"
+msgstr ""
+
+#: functions.php:1443
+msgid "Link Hover Color"
+msgstr ""
+
+#: functions.php:1447
+msgid "Footer Text Color"
+msgstr ""
+
+#: functions.php:1451
+msgid "Footer Background Color"
+msgstr ""
+
+#: functions.php:1455
+msgid "Footer Titles Color"
+msgstr ""
+
+#: functions.php:1462
+msgid "Logo"
+msgstr ""
+
+#: functions.php:1466
+msgid "W Image"
+msgstr ""
+
+#: functions.php:1470
+msgid "Default Post Thumbnail"
+msgstr ""
+
+#: functions.php:1540
+msgid "Images"
+msgstr ""
+
+#. #-#-#-#-#  WPMedium.pot (WPMedium 1.5)  #-#-#-#-#
+#. Theme Name of the plugin/theme
+#: functions.php:1576
+msgid "WPMedium"
+msgstr ""
+
+#: functions.php:1595
+msgid "AJAX Posts Load"
+msgstr ""
+
+#: functions.php:1614
+msgid "Use Default Post Thumbnail"
+msgstr ""
+
+#: functions.php:1636
+msgid "Use local font files"
+msgstr ""
+
+#: functions.php:1637
+msgid "Google API Fonts"
+msgstr ""
+
+#: functions.php:1658
+msgid "Category"
+msgstr ""
+
+#: functions.php:1659
+msgid "Post Tag"
+msgstr ""
+
+#: functions.php:1668
+msgid "Footer"
+msgstr ""
+
+#: functions.php:1690
+msgid "None"
+msgstr ""
+
+#: functions.php:1691
+msgid "Copyright & Credits"
+msgstr ""
+
+#: functions.php:1692
+msgid "Widget Area"
+msgstr ""
+
+#: functions.php:1693
+msgid "Both"
+msgstr ""
+
+#: functions.php:1711
+msgid "WPMedium Credits Line"
+msgstr ""
+
+#: functions.php:1730
+msgid "WPMedium Copyright Line"
+msgstr ""
+
+#: functions.php:1749
+msgid "Previous/Next Post links"
+msgstr ""
+
+#: functions.php:1753
+msgid "Small"
+msgstr ""
+
+#: functions.php:1754
+msgid "Large"
+msgstr ""
+
+#: functions.php:1755
+msgid "Full"
+msgstr ""
+
+#: searchform.php:5
+msgid "Search"
+msgstr ""
+
+#. Theme URI of the plugin/theme
+msgid "http://www.caercam.org/wpmedium"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Clean and simple Medium like WordPress theme"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Charlie MERLAND"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.caercam.org/"
+msgstr ""

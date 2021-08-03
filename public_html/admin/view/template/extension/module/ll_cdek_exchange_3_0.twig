@@ -1,0 +1,1372 @@
+{#
+/**
+ * @author    p0v1n0m <support@lutylab.ru>
+ * @license   Commercial
+ * @link      https://lutylab.ru
+ */
+#}
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="button" onclick="$('#form').submit()" class="btn btn-success"><i class="fa fa-save"></i> {{ button_save }}</button>
+        <a href="{{ shipping }}" data-toggle="tooltip" title="{{ button_shipping }}" class="btn btn-default"><i class="fa fa-truck"></i></a>
+        <a href="{{ exchange }}" data-toggle="tooltip" title="{{ button_exchange }}" class="btn btn-default"><i class="fa fa-exchange"></i></a>
+        <a href="{{ order }}" data-toggle="tooltip" title="{{ button_order }}" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ol class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if module_ll_cdek_exchange_license %}
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-log" data-toggle="tab" class="nav-link"><i class="fa fa-bars"></i> {{ tab_log }}</a></li>
+            <li><a href="#tab-api" data-toggle="tab" class="nav-link"><i class="fa fa-terminal"></i> {{ tab_api }}</a></li>
+            <li><a href="#tab-setting" data-toggle="tab" class="nav-link"><i class="fa fa-cog"></i> {{ tab_setting }}</a></li>
+            <li><a href="#tab-file" data-toggle="tab" class="nav-link"><i class="fa fa-files-o"></i> {{ tab_file }}</a></li>
+            <li><a href="#tab-preset" data-toggle="tab" class="nav-link"><i class="fa fa-toggle-on"></i> {{ tab_preset }}</a></li>
+            <li><a href="#tab-merge" data-toggle="tab" class="nav-link"><i class="fa fa-compress"></i> {{ tab_merge }}</a></li>
+            <li><a href="#tab-tracking" data-toggle="tab" class="nav-link"><i class="fa fa-retweet"></i> {{ tab_tracking }}</a></li>
+            <li><a href="#tab-alert" data-toggle="tab" class="nav-link"><i class="fa fa-bell"></i> {{ tab_alert }}</a></li>
+            <li><a href="#tab-cron" data-toggle="tab" class="nav-link"><i class="fa fa-magic"></i> {{ tab_cron }}</a></li>
+            <li><a href="#tab-sms" data-toggle="tab" class="nav-link"><i class="fa fa-commenting"></i> {{ tab_sms }}</a></li>
+            <li><a href="#tab-support" data-toggle="tab" class="nav-link"><i class="fa fa-life-ring"></i> {{ tab_support }}</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-log">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_logging }}</label>
+                <div class="col-sm-10">
+                  <div class="btn-group" data-toggle="buttons">
+                    {% if module_ll_cdek_exchange_logging %}
+                    <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_logging" value="0" autocomplete="off">{{ text_disabled }}</label>
+                    <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_logging" value="1" autocomplete="off" checked="checked">{{ text_enabled }}</label>
+                    {% else %}
+                    <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_logging" value="0" autocomplete="off" checked="checked">{{ text_disabled }}</label>
+                    <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_logging" value="1" autocomplete="off">{{ text_enabled }}</label>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" id="log-container">
+                <div class="col-sm-12">
+                  <div class="btn-group btn-group-justified btn-group-sm" role="group">
+                    <a onclick="logLoad();" class="btn btn-success" id="log-load"><i class="fa fa-refresh"></i> {{ button_load }}</a>
+                    <a onclick="logDownload();" class="btn btn-primary" id="log-download"><i class="fa fa-download"></i> {{ button_download }}</a>
+                    <a onclick="logClear();" class="btn btn-danger" id="log-clear"><i class="fa fa-eraser"></i> {{ button_clear }}</a>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <textarea wrap="off" readonly class="form-control" id="log">{{ help_log }}</textarea>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-api">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_api_login }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_api_login" value="{{ module_ll_cdek_exchange_api_login }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_api_key }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_api_key" value="{{ module_ll_cdek_exchange_api_key }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_test }}</label>
+                <div class="col-sm-10">
+                  <div class="btn-group" data-toggle="buttons">
+                    {% if module_ll_cdek_exchange_test %}
+                    <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_test" value="0" autocomplete="off">{{ text_disabled }}</label>
+                    <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_test" value="1" autocomplete="off" checked="checked">{{ text_enabled }}</label>
+                    {% else %}
+                    <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_test" value="0" autocomplete="off" checked="checked">{{ text_disabled }}</label>
+                    <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_test" value="1" autocomplete="off">{{ text_enabled }}</label>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_timeout }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_timeout" value="{{ module_ll_cdek_exchange_timeout }}" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-setting">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_timezone }}</label>
+                <div class="col-sm-10">
+                  <select name="module_ll_cdek_exchange_timezone" class="form-control">
+                    {% for timezone in timezones %}
+                    <option value="{{ timezone }}" {% if timezone == module_ll_cdek_exchange_timezone %}selected="selected"{% endif %}>{{ timezone }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_currency }}</label>
+                <div class="col-sm-10">
+                  <select name="module_ll_cdek_exchange_currency" class="form-control">
+                    {% for currency in currencies %}
+                    <option value="{{ currency.code }}" {% if currency.code == module_ll_cdek_exchange_currency %}selected="selected"{% endif %}>{{ currency.title }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_cod }}</label>
+                <div class="col-sm-10">
+                  <div class="well well-sm" style="height: 150px; overflow: auto; margin: 0;">
+                    {% if payments %}
+                    {% for payment in payments %}
+                    <div class="checkbox">
+                      <label><input type="checkbox" name="module_ll_cdek_exchange_cod[]" value="{{ payment.code }}" {% if payment.code in module_ll_cdek_exchange_cod %}checked="checked"{% endif %} /> {{ payment.name }}</label>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_service_count }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_service_count" value="{{ module_ll_cdek_exchange_service_count }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_list_order_status }}</label>
+                <div class="col-sm-10">
+                  <div class="well well-sm" style="height: 150px; overflow: auto; margin: 0;">
+                    {% for order_statuse in order_statuses %}
+                    <div class="checkbox">
+                      <label><input type="checkbox" name="module_ll_cdek_exchange_list_order_status[]" value="{{ order_statuse.order_status_id }}" {% if order_statuse.order_status_id in module_ll_cdek_exchange_list_order_status %}checked="checked"{% endif %} /> {{ order_statuse.name }}</label>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-file">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_invoice_count }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_invoice_count" value="{{ module_ll_cdek_exchange_invoice_count }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_sticker_count }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_sticker_count" value="{{ module_ll_cdek_exchange_sticker_count }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_sticker_format }}</label>
+                <div class="col-sm-10">
+                  <select name="module_ll_cdek_exchange_sticker_format" class="form-control">
+                    <option value="A4" {% if module_ll_cdek_exchange_sticker_format == "A4" %}selected="selected"{% endif %}>A4</option>
+                    <option value="A5" {% if module_ll_cdek_exchange_sticker_format == "A5" %}selected="selected"{% endif %}>A5</option>
+                    <option value="A6" {% if module_ll_cdek_exchange_sticker_format == "A6" %}selected="selected"{% endif %}>A6</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_files }}</label>
+                <div class="col-sm-10">
+                  <div class="well well-sm" style="height: 150px; overflow: auto; margin: 0;">
+                    {% for type, name in files %}
+                    <div class="checkbox">
+                      <label><input type="checkbox" name="module_ll_cdek_exchange_files[]" value="{{ type }}" {% if type in module_ll_cdek_exchange_files %}checked="checked"{% endif %} {% if type == "torg" and not ll_invoice %}disabled{% endif %} /> {{ name }}</label>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_files_email }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_files_email" value="{{ module_ll_cdek_exchange_files_email }}" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-preset">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Номер заказа</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_order_number" value="{{ module_ll_cdek_exchange_default_order_number }}" class="form-control" />
+                  <small class="form-text text-muted">Обязательно должен содержать переменную <code>{{ '{{order_id}}' }}</code>, передающую идентификатор заказа в магазине.</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Комментарий</label>
+                <div class="col-sm-10">
+                  <textarea type="text" name="module_ll_cdek_exchange_default_order_comment" class="form-control">{{ module_ll_cdek_exchange_default_order_comment }}</textarea>
+                  <small class="form-text text-muted">Чтобы загружать значение из соответствующего поля заказа, необходимо добавить переменную <code>{{ '{{comment}}' }}</code>.</small>
+                </div>
+              </div>
+              <legend>Реквизиты истинного продавца</legend>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Адрес</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_seller_address" value="{{ module_ll_cdek_exchange_default_seller_address }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Наименование</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_seller_name" value="{{ module_ll_cdek_exchange_default_seller_name }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">ИНН</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_seller_inn" value="{{ module_ll_cdek_exchange_default_seller_inn }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Телефон</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_seller_phone" value="{{ module_ll_cdek_exchange_default_seller_phone }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Форма собственности</label>
+                <div class="col-sm-10">
+                  <select name="module_ll_cdek_exchange_default_seller_form" class="form-control">
+                    <option value=""></option>
+                    {% for id, title in ownership_forms %}
+                    <option value="{{ id }}" {% if id == module_ll_cdek_exchange_default_seller_form %}selected="selected"{% endif %}>{{ title }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <legend>Если отправитель не клиент СДЭК</legend>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Наименование компании</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_sender_company" value="{{ module_ll_cdek_exchange_default_sender_company }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Контактное лицо</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_sender_name" value="{{ module_ll_cdek_exchange_default_sender_name }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Улица</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_sender_street" value="{{ module_ll_cdek_exchange_default_sender_street }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Дом</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_sender_house" value="{{ module_ll_cdek_exchange_default_sender_house }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Квартира/офис</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_sender_flat" value="{{ module_ll_cdek_exchange_default_sender_flat }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Телефон</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_sender_phone" value="{{ module_ll_cdek_exchange_default_sender_phone }}" class="form-control" />
+                </div>
+              </div>
+              <legend>Данные для международного заказа</legend>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Грузоотправитель</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_shipper_name" value="{{ module_ll_cdek_exchange_default_shipper_name }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Адрес грузоотправителя</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_shipper_address" value="{{ module_ll_cdek_exchange_default_shipper_address }}" class="form-control" />
+                </div>
+              </div>
+              <legend>Получатель</legend>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Фамилия</label>
+                <div class="col-sm-10">
+                  <select name="module_ll_cdek_exchange_default_recipient_f" class="form-control">
+                    {% for field in lastname_fields %}
+                    <option value="{{ field }}" {% if field == module_ll_cdek_exchange_default_recipient_f %}selected="selected"{% endif %}>{{ field }}</option>
+                    {% endfor %}
+                  </select>
+                  <small class="form-text text-muted">Название поля в стандартной таблице заказов <strong>order</strong>.</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Имя</label>
+                <div class="col-sm-10">
+                  <select name="module_ll_cdek_exchange_default_recipient_i" class="form-control">
+                    {% for field in firstname_fields %}
+                    <option value="{{ field }}" {% if field == module_ll_cdek_exchange_default_recipient_i %}selected="selected"{% endif %}>{{ field }}</option>
+                    {% endfor %}
+                  </select>
+                  <small class="form-text text-muted">Название поля в стандартной таблице заказов <strong>order</strong>.</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Улица</label>
+                <div class="col-sm-10">
+                  <select name="module_ll_cdek_exchange_default_address_street" class="form-control">
+                    {% for field in address_fields %}
+                    <option value="{{ field }}" {% if field == module_ll_cdek_exchange_default_address_street %}selected="selected"{% endif %}>{{ field }}</option>
+                    {% endfor %}
+                  </select>
+                  <small class="form-text text-muted">Название поля в стандартной таблице заказов <strong>order</strong>.</small>
+                </div>
+              </div>
+              <legend>Товары</legend>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Артикул</label>
+                <div class="col-sm-10">
+                  <select name="module_ll_cdek_exchange_default_product_article" class="form-control">
+                    <option value="model" {% if 'model' == module_ll_cdek_exchange_default_product_article %}selected="selected"{% endif %}>model</option>
+                    <option value="sku" {% if 'sku' == module_ll_cdek_exchange_default_product_article %}selected="selected"{% endif %}>sku</option>
+                    <option value="upc" {% if 'upc' == module_ll_cdek_exchange_default_product_article %}selected="selected"{% endif %}>upc</option>
+                    <option value="ean" {% if 'ean' == module_ll_cdek_exchange_default_product_article %}selected="selected"{% endif %}>ean</option>
+                    <option value="jan" {% if 'jan' == module_ll_cdek_exchange_default_product_article %}selected="selected"{% endif %}>jan</option>
+                    <option value="isbn" {% if 'isbn' == module_ll_cdek_exchange_default_product_article %}selected="selected"{% endif %}>isbn</option>
+                    <option value="mpn" {% if 'mpn' == module_ll_cdek_exchange_default_product_article %}selected="selected"{% endif %}>mpn</option>
+                    <option value="location" {% if 'location' == module_ll_cdek_exchange_default_product_article %}selected="selected"{% endif %}>location</option>
+                    <option value="product_id" {% if 'product_id' == module_ll_cdek_exchange_default_product_article %}selected="selected"{% endif %}>product_id</option>
+                  </select>
+                  <small class="form-text text-muted">Название поля в стандартной таблице заказов <strong>product</strong>.</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Упаковка</label>
+                <div class="col-sm-10">
+                  <select name="module_ll_cdek_exchange_default_product_pack" class="form-control">
+                    <option value="0" {% if 0 == module_ll_cdek_exchange_default_product_pack %}selected="selected"{% endif %}>Нет</option>
+                    <option value="1" {% if 1 == module_ll_cdek_exchange_default_product_pack %}selected="selected"{% endif %}>Да</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Вес упаковки</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" name="module_ll_cdek_exchange_default_product_pack_weight" value="{{ module_ll_cdek_exchange_default_product_pack_weight }}" class="form-control" />
+                    <div class="input-group-addon">г</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Ставка НДС товара</label>
+                <div class="col-sm-10">
+                  <select name="module_ll_cdek_exchange_default_product_vat_rate" class="form-control">
+                    {% for id, title in vats %}
+                    <option value="{{ id }}" {% if id == module_ll_cdek_exchange_default_product_vat_rate %}selected="selected"{% endif %}>{{ title }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_merge_cost }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_merge_cost" value="{{ module_ll_cdek_exchange_merge_cost }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_merge }}</label>
+                <div class="col-sm-10">
+                  <div class="btn-group" data-toggle="buttons">
+                    {% if module_ll_cdek_exchange_merge_cost_type %}
+                    <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_merge_cost_type" value="0" autocomplete="off">{{ text_disabled }}</label>
+                    <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_merge_cost_type" value="1" autocomplete="off" checked="checked">{{ text_enabled }}</label>
+                    {% else %}
+                    <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_merge_cost_type" value="0" autocomplete="off" checked="checked">{{ text_disabled }}</label>
+                    <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_merge_cost_type" value="1" autocomplete="off">{{ text_enabled }}</label>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <legend>Вызов курьера</legend>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Дата ожидания курьера</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_courier_date" value="{{ module_ll_cdek_exchange_default_courier_date }}" class="form-control" />
+                  <small class="form-text text-muted">Количество дней, которые необходимо добавить к дате создания заявки.</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Время ожидания курьера</label>
+                <div class="col-sm-10">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="input-group time">
+                        <div class="input-group-addon">с</div>
+                        <input type="text" name="module_ll_cdek_exchange_default_courier_time_beg" value="{{ module_ll_cdek_exchange_default_courier_time_beg }}" class="form-control" />
+                        <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="input-group time">
+                        <div class="input-group-addon">до</div>
+                        <input type="text" name="module_ll_cdek_exchange_default_courier_time_end" value="{{ module_ll_cdek_exchange_default_courier_time_end }}" class="form-control" />
+                        <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Время обеда</label>
+                <div class="col-sm-10">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="input-group time">
+                        <div class="input-group-addon">с</div>
+                        <input type="text" name="module_ll_cdek_exchange_default_courier_lunch_beg" value="{{ module_ll_cdek_exchange_default_courier_lunch_beg }}" class="form-control" />
+                        <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="input-group time">
+                        <div class="input-group-addon">до</div>
+                        <input type="text" name="module_ll_cdek_exchange_default_courier_lunch_end" value="{{ module_ll_cdek_exchange_default_courier_lunch_end }}" class="form-control" />
+                        <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                      </div>
+                    </div>
+                  </div>
+                  <small class="form-text text-muted">Заполнять только если входит во временной диапазон времени ожидания курьера.</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Улица отправителя</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_courier_street" value="{{ module_ll_cdek_exchange_default_courier_street }}" class="form-control" maxlength="50" />
+                  <small class="form-text text-muted">На один адрес может быть не более одного вызова курьера в день. Не надо указывать префиксы значений, вроде «ул.».</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Дом, корпус, строение отправителя</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_courier_house" value="{{ module_ll_cdek_exchange_default_courier_house }}" class="form-control" maxlength="30" />
+                  <small class="form-text text-muted">Не надо указывать префиксы значений, вроде «дом».</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Квартира/офис отправителя</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_courier_flat" value="{{ module_ll_cdek_exchange_default_courier_flat }}" class="form-control" maxlength="10" />
+                  <small class="form-text text-muted">Не надо указывать префиксы значений, вроде «кв.».</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">ФИО отправителя</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_courier_sender_name" value="{{ module_ll_cdek_exchange_default_courier_sender_name }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Телефон отправителя</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_default_courier_send_phone" value="{{ module_ll_cdek_exchange_default_courier_send_phone }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Комментарий</label>
+                <div class="col-sm-10">
+                  <textarea type="text" name="module_ll_cdek_exchange_default_courier_comment" class="form-control">{{ module_ll_cdek_exchange_default_courier_comment }}</textarea>
+                  <small class="form-text text-muted">Описание груза.</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <table id="services" class="table table-striped table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <td class="text-left">Тарифы СДЭК</td>
+                        <td class="text-left">Доп. услуги</td>
+                        <td></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% set service_row = 0 %}
+                      {% for default_service in module_ll_cdek_exchange_default_services %}
+                        <tr id="service-row-{{ service_row }}">
+                          <td class="text-left">
+                            <div class="well well-sm" style="height: 150px; overflow: auto; margin: 0;">
+                              {% for variant in variants %}
+                              <div class="checkbox">
+                                <label>
+                                  <input type="checkbox" name="module_ll_cdek_exchange_default_services[{{ service_row }}][variants][]" value="{{ variant.code }}" {% if variant.code in default_service.variants %}checked="checked"{% endif %} />
+                                  {{ variant.name }}
+                                </label>
+                              </div>
+                              {% endfor %}
+                            </div>
+                          </td>
+                          <td class="text-left">
+                            <div class="well well-sm" style="height: 150px; overflow: auto; margin: 0;">
+                              {% for service in services %}
+                              <div class="checkbox">
+                                <label>
+                                  <input type="checkbox" name="module_ll_cdek_exchange_default_services[{{ service_row }}][services][]" value="{{ service.code }}" {% if service.code in default_service.services %}checked="checked"{% endif %} />
+                                  {{ service.name }}
+                                </label>
+                              </div>
+                              {% endfor %}
+                            </div>
+                          </td>
+                          <td class="text-right">
+                            <button type="button" onclick="$('#service-row-{{ service_row }}').remove();" class="btn btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button>
+                          </td>
+                        </tr>
+                        {% set service_row = service_row + 1 %}
+                      {% endfor %}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="3">
+                          <button type="button" onclick="addService('{{ service_row }}');" class="btn btn-success btn-block btn-sm"><i class="fa fa-plus-circle"></i> {{ button_add }}</button>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-merge">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_merge }}</label>
+                <div class="col-sm-10">
+                  <div class="btn-group" data-toggle="buttons">
+                    {% if module_ll_cdek_exchange_merge %}
+                    <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_merge" value="0" autocomplete="off">{{ text_disabled }}</label>
+                    <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_merge" value="1" autocomplete="off" checked="checked">{{ text_enabled }}</label>
+                    {% else %}
+                    <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_merge" value="0" autocomplete="off" checked="checked">{{ text_disabled }}</label>
+                    <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_merge" value="1" autocomplete="off">{{ text_enabled }}</label>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_merge_name }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_merge_name" value="{{ module_ll_cdek_exchange_merge_name }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_merge_model }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_merge_model" value="{{ module_ll_cdek_exchange_merge_model }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_merge_link }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_merge_link" value="{{ module_ll_cdek_exchange_merge_link }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_merge_vat }}</label>
+                <div class="col-sm-10">
+                  <select name="module_ll_cdek_exchange_merge_vat" class="form-control">
+                    {% for id, title in vats %}
+                    <option value="{{ id }}" {% if id == module_ll_cdek_exchange_merge_vat %}selected="selected"{% endif %}>{{ title }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_merge_from_model }}</label>
+                <div class="col-sm-10">
+                  <div class="btn-group" data-toggle="buttons">
+                    {% if module_ll_cdek_exchange_merge_from_model %}
+                    <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_merge_from_model" value="0" autocomplete="off">{{ text_disabled }}</label>
+                    <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_merge_from_model" value="1" autocomplete="off" checked="checked">{{ text_enabled }}</label>
+                    {% else %}
+                    <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_merge_from_model" value="0" autocomplete="off" checked="checked">{{ text_disabled }}</label>
+                    <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_merge_from_model" value="1" autocomplete="off">{{ text_enabled }}</label>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-tracking">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <table id="trackings" class="table table-striped table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <td class="text-left">{{ column_status }}</td>
+                        <td class="text-left">{{ column_order_status }}</td>
+                        <td class="text-left">{{ column_notify }}</td>
+                        <td></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% set tracking_row = 0 %}
+                      {% for tracking in module_ll_cdek_exchange_trackings %}
+                        <tr id="tracking-row-{{ tracking_row }}">
+                          <td class="text-left">
+                            <select name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][shipping_status]" class="form-control">
+                              {% for id, status in statuses %}
+                                <option value="{{ id }}" {% if id == tracking.shipping_status %}selected="selected"{% endif %}>{{ status.title }}</option>
+                              {% endfor %}
+                            </select>
+                          </td>
+                          <td class="text-left">
+                            <select name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][order_status]" class="form-control">
+                              {% for order_status in order_statuses %}
+                                <option value="{{ order_status.order_status_id }}" {% if tracking.order_status == order_status.order_status_id %}selected="selected"{% endif %}>{{ order_status.name }}</option>
+                              {% endfor %}
+                            </select>
+                          </td>
+                          <td class="text-left">
+                            <table class="table" style="background: transparent;">
+                              <tr>
+                                <td style="border: none;">
+                                  <div class="form-group">
+                                    <label class="col-sm-6 control-label">{{ text_notify }}</label>
+                                    <div class="col-sm-6">
+                                      <div class="btn-group" data-toggle="buttons">
+                                        {% if tracking.notify %}
+                                        <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][notify]" value="0" autocomplete="off">{{ text_no }}</label>
+                                        <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][notify]" value="1" autocomplete="off" checked="checked">{{ text_yes }}</label>
+                                        {% else %}
+                                        <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][notify]" value="0" autocomplete="off" checked="checked">{{ text_no }}</label>
+                                        <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][notify]" value="1" autocomplete="off">{{ text_yes }}</label>
+                                        {% endif %}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
+                                <td style="border: none;">
+                                  {% for language in languages %}
+                                    <div class="input-group pull-left">
+                                      <span class="input-group-addon">
+                                        <img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" />
+                                      </span>
+                                      <textarea name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][comment][{{ language.language_id }}]" class="form-control" rows="3">{{ tracking.comment[language.language_id] }}</textarea>
+                                    </div>
+                                  {% endfor %}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <div class="form-group">
+                                    <label class="col-sm-6 control-label">{{ text_notify_email }}</label>
+                                    <div class="col-sm-6">
+                                      <div class="btn-group" data-toggle="buttons">
+                                        {% if tracking.notify_email %}
+                                        <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][notify_email]" value="0" autocomplete="off">{{ text_no }}</label>
+                                        <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][notify_email]" value="1" autocomplete="off" checked="checked">{{ text_yes }}</label>
+                                        {% else %}
+                                        <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][notify_email]" value="0" autocomplete="off" checked="checked">{{ text_no }}</label>
+                                        <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][notify_email]" value="1" autocomplete="off">{{ text_yes }}</label>
+                                        {% endif %}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
+                                <td>
+                                  {% for language in languages %}
+                                    <div class="input-group pull-left">
+                                      <span class="input-group-addon">
+                                        <img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" />
+                                      </span>
+                                      <textarea name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][email][{{ language.language_id }}]" class="form-control" rows="3">{{ tracking.email[language.language_id] }}</textarea>
+                                    </div>
+                                  {% endfor %}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <div class="form-group">
+                                    <label class="col-sm-6 control-label">{{ text_notify_sms }}</label>
+                                    <div class="col-sm-6">
+                                      <div class="btn-group" data-toggle="buttons">
+                                        {% if tracking.notify_sms %}
+                                        <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][notify_sms]" value="0" autocomplete="off">{{ text_no }}</label>
+                                        <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][notify_sms]" value="1" autocomplete="off" checked="checked">{{ text_yes }}</label>
+                                        {% else %}
+                                        <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][notify_sms]" value="0" autocomplete="off" checked="checked">{{ text_no }}</label>
+                                        <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][notify_sms]" value="1" autocomplete="off">{{ text_yes }}</label>
+                                        {% endif %}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
+                                <td>
+                                  {% for language in languages %}
+                                    <div class="input-group pull-left">
+                                      <span class="input-group-addon">
+                                        <img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" />
+                                      </span>
+                                      <textarea name="module_ll_cdek_exchange_trackings[{{ tracking_row }}][sms][{{ language.language_id }}]" class="form-control" rows="3">{{ tracking.sms[language.language_id] }}</textarea>
+                                    </div>
+                                  {% endfor %}
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                          <td class="text-right">
+                            <button type="button" onclick="$('#tracking-row-{{ tracking_row }}').remove();" class="btn btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button>
+                          </td>
+                        </tr>
+                        {% set tracking_row = tracking_row + 1 %}
+                      {% endfor %}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="4">
+                          <button type="button" onclick="addTracking('{{ tracking_row }}');" class="btn btn-success btn-block btn-sm"><i class="fa fa-plus-circle"></i> {{ button_add }}</button>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-alert">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <table id="alerts" class="table table-striped table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <td class="text-left">{{ column_start }}</td>
+                        <td class="text-left">{{ column_delay }}</td>
+                        <td class="text-left">{{ column_stop }}</td>
+                        <td class="text-left">{{ column_notify }}</td>
+                        <td></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% set alert_row = 0 %}
+                      {% for alert in module_ll_cdek_exchange_alerts %}
+                        <tr id="alert-row-{{ alert_row }}">
+                          <td class="text-left">
+                            <select name="module_ll_cdek_exchange_alerts[{{ alert_row }}][start_status]" class="form-control">
+                              {% for id, status in statuses %}
+                                {% if id not in ['-1', '0', '999'] %}
+                                <option value="{{ id }}" {% if id == alert.start_status %}selected="selected"{% endif %}>{{ status.title }}</option>
+                                {% endif %}
+                              {% endfor %}
+                            </select>
+                          </td>
+                          <td class="text-left">
+                            <input type="text" name="module_ll_cdek_exchange_alerts[{{ alert_row }}][delay]" class="form-control" value="{{ alert.delay }}" />
+                          </td>
+                          <td class="text-left">
+                            <div class="well well-sm" style="height: 300px; overflow: auto; margin: 0;">
+                              {% for id, status in statuses %}
+                              {% if id not in ['-1', '0', '999'] %}
+                              <div class="checkbox">
+                                <label><input type="checkbox" name="module_ll_cdek_exchange_alerts[{{ alert_row }}][stop_status][]" value="{{ id }}" {% if alert.stop_status and id in alert.stop_status %}checked="checked"{% endif %} /> {{ status.title }}</label>
+                              </div>
+                              {% endif %}
+                              {% endfor %}
+                            </div>
+                          </td>
+                          <td class="text-left">
+                            <table class="table" style="background: transparent;">
+                              <tr>
+                                <td style="border: none;">
+                                  <div class="form-group">
+                                    <label class="col-sm-6 control-label">{{ text_notify_email }}</label>
+                                    <div class="col-sm-6">
+                                      <div class="btn-group" data-toggle="buttons">
+                                        {% if alert.notify_email %}
+                                        <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_alerts[{{ alert_row }}][notify_email]" value="0" autocomplete="off">{{ text_no }}</label>
+                                        <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_alerts[{{ alert_row }}][notify_email]" value="1" autocomplete="off" checked="checked">{{ text_yes }}</label>
+                                        {% else %}
+                                        <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_alerts[{{ alert_row }}][notify_email]" value="0" autocomplete="off" checked="checked">{{ text_no }}</label>
+                                        <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_alerts[{{ alert_row }}][notify_email]" value="1" autocomplete="off">{{ text_yes }}</label>
+                                        {% endif %}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
+                                <td style="border: none;">
+                                  {% for language in languages %}
+                                    <div class="input-group pull-left">
+                                      <span class="input-group-addon">
+                                        <img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" />
+                                      </span>
+                                      <textarea name="module_ll_cdek_exchange_alerts[{{ alert_row }}][email][{{ language.language_id }}]" class="form-control" rows="3">{{ alert.email[language.language_id] }}</textarea>
+                                    </div>
+                                  {% endfor %}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <div class="form-group">
+                                    <label class="col-sm-6 control-label">{{ text_notify_sms }}</label>
+                                    <div class="col-sm-6">
+                                      <div class="btn-group" data-toggle="buttons">
+                                        {% if alert.notify_sms %}
+                                        <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_alerts[{{ alert_row }}][notify_sms]" value="0" autocomplete="off">{{ text_no }}</label>
+                                        <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_alerts[{{ alert_row }}][notify_sms]" value="1" autocomplete="off" checked="checked">{{ text_yes }}</label>
+                                        {% else %}
+                                        <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_alerts[{{ alert_row }}][notify_sms]" value="0" autocomplete="off" checked="checked">{{ text_no }}</label>
+                                        <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_alerts[{{ alert_row }}][notify_sms]" value="1" autocomplete="off">{{ text_yes }}</label>
+                                        {% endif %}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
+                                <td>
+                                  {% for language in languages %}
+                                    <div class="input-group pull-left">
+                                      <span class="input-group-addon">
+                                        <img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" />
+                                      </span>
+                                      <textarea name="module_ll_cdek_exchange_alerts[{{ alert_row }}][sms][{{ language.language_id }}]" class="form-control" rows="3">{{ alert.sms[language.language_id] }}</textarea>
+                                    </div>
+                                  {% endfor %}
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                          <td class="text-right">
+                            <button type="button" onclick="$('#alert-row-{{ alert_row }}').remove();" class="btn btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button>
+                          </td>
+                        </tr>
+                        {% set alert_row = alert_row + 1 %}
+                      {% endfor %}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="5">
+                          <button type="button" onclick="addAlert('{{ alert_row }}');" class="btn btn-success btn-block btn-sm"><i class="fa fa-plus-circle"></i> {{ button_add }}</button>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-cron">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_cron_key }}</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" name="module_ll_cdek_exchange_cron_key" value="{{ module_ll_cdek_exchange_cron_key }}" class="form-control" readonly />
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-success" id="cron-key" onclick="getCronKey();"><i class="fa fa-refresh"></i> {{ button_edit }}</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_update_statuses }}</label>
+                <div class="col-sm-10">
+                  <div class="well well-sm" style="height: 150px; overflow: auto; margin: 0;">
+                    {% for order_status in order_statuses %}
+                    <div class="checkbox">
+                      <label>
+                        {% if order_status.order_status_id in module_ll_cdek_exchange_update_statuses %}
+                        <input type="checkbox" name="module_ll_cdek_exchange_update_statuses[]" value="{{ order_status.order_status_id }}" checked="checked" />
+                        {{ order_status.name }}
+                        {% else %}
+                        <input type="checkbox" name="module_ll_cdek_exchange_update_statuses[]" value="{{ order_status.order_status_id }}" />
+                        {{ order_status.name }}
+                        {% endif %}
+                      </label>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_update_day }}</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" name="module_ll_cdek_exchange_update_day" value="{{ module_ll_cdek_exchange_update_day }}" class="form-control" />
+                    <div class="input-group-addon">{{ text_day }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_update_url }}</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" name="module_ll_cdek_exchange_update_url" value="{{ update_url }}" class="form-control" readonly />
+                    <span class="input-group-btn">
+                      <a class="btn btn-success" href="{{ update_url }}" target="_blank"><i class="fa fa-arrow-right"></i></a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_update_pvz_url }}</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" name="module_ll_cdek_exchange_update_pvz_url" value="{{ update_pvz_url }}" class="form-control" readonly />
+                    <span class="input-group-btn">
+                      <a class="btn btn-success" href="{{ update_pvz_url }}" target="_blank"><i class="fa fa-arrow-right"></i></a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-notify">
+            </div>
+            <div class="tab-pane" id="tab-sms">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_sms_gate }}</label>
+                <div class="col-sm-10">
+                  <select name="module_ll_cdek_exchange_sms_gate" class="form-control">
+                    {% for sms_gate in sms_gates %}
+                    <option value="{{ sms_gate.code }}" {% if sms_gate.code == module_ll_cdek_exchange_sms_gate %}selected="selected"{% endif %}>{{ sms_gate.title }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_sms_login }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_sms_login" value="{{ module_ll_cdek_exchange_sms_login }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_sms_password }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_sms_password" value="{{ module_ll_cdek_exchange_sms_password }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_sms_sender }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="module_ll_cdek_exchange_sms_sender" value="{{ module_ll_cdek_exchange_sms_sender }}" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-support">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_license }}</label>
+                <div class="col-sm-10">
+                  <input type="hidden" value="{{ host }}" />
+                  <input type="text" name="module_ll_cdek_exchange_license" value="{{ module_ll_cdek_exchange_license }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ text_site }}</label>
+                <div class="col-sm-10"><a href="{{ site }}" target="_blank" class="btn">{{ site }}</a></div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ text_docs }}</label>
+                <div class="col-sm-10"><a href="{{ docs }}" target="_blank" class="btn">{{ docs }}</a></div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ text_email }}</label>
+                <div class="col-sm-10"><a href="mailto:{{ email }}" class="btn">{{ email }}</a></div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ text_service }}</label>
+                <div class="col-sm-10"><a href="{{ api_service }}" target="_blank" class="btn">{{ api_service }}</a></div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ text_api_docs }}</label>
+                <div class="col-sm-10"><a href="{{ api_docs }}" target="_blank" class="btn">{{ api_docs }}</a></div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="panel-footer">
+        <img src="../image/catalog/{{ m }}/logo.png" class="pull-right">
+        <span class="label label-default">{{ m }}</span>
+        <span class="label label-default">{{ version }}</span>
+      </div>
+    </div>
+    {% else %}
+    <div class="panel panel-danger">
+      <div class="panel-heading">{{ heading_license }}</div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ entry_license }}</label>
+            <div class="col-sm-10">
+              <input type="hidden" value="{{ host }}" />
+              <input type="text" name="module_ll_cdek_exchange_license" value="{{ module_ll_cdek_exchange_license }}" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ text_site }}</label>
+            <div class="col-sm-10"><a href="{{ site }}" target="_blank" class="btn">{{ site }}</a></div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ text_docs }}</label>
+            <div class="col-sm-10"><a href="{{ docs }}" target="_blank" class="btn">{{ docs }}</a></div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ text_email }}</label>
+            <div class="col-sm-10"><a href="mailto:{{ email }}" class="btn">{{ email }}</a></div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ text_service }}</label>
+            <div class="col-sm-10"><a href="{{ api_service }}" target="_blank" class="btn">{{ api_service }}</a></div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ text_api_docs }}</label>
+            <div class="col-sm-10"><a href="{{ api_docs }}" target="_blank" class="btn">{{ api_docs }}</a></div>
+          </div>
+        </form>
+      </div>
+      <div class="panel-footer">
+        <img src="../image/catalog/{{ m }}/logo.png" class="pull-right">
+        <span class="label label-default">{{ m }}</span>
+        <span class="label label-default">{{ version }}</span>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% if module_ll_cdek_exchange_license %}
+<script>
+var service_row = {{ service_row }};
+
+function addService() {
+  html  = '<tr id="service-row-' + service_row + '">';
+  html += '  <td class="text-left">';
+  html += '    <div class="well well-sm" style="height: 150px; overflow: auto; margin: 0;">';
+  {% for variant in variants %}
+  html += '      <div class="checkbox"><label><input type="checkbox" name="module_ll_cdek_exchange_default_services[' + service_row  + '][variants][]" value="{{ variant.code }}" />{{ variant.name }}</label></div>';
+  {% endfor %}
+  html += '    </div>';
+  html += '  </td>';
+  html += '  <td class="text-left">';
+  html += '    <div class="well well-sm" style="height: 150px; overflow: auto; margin: 0;">';
+  {% for service in services %}
+  html += '      <div class="checkbox"><label><input type="checkbox" name="module_ll_cdek_exchange_default_services[' + service_row  + '][services][]" value="{{ service.code }}" />{{ service.name }}</label></div>';
+  {% endfor %}
+  html += '    </div>';
+  html += '  </td>';
+  html += '  <td class="text-right"><button type="button" onclick="$(\'#service-row-' + service_row  + '\').remove();" class="btn btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button></td>';
+  html += '</tr>';
+
+  $('#services > tbody').append(html);
+
+  service_row++;
+}
+
+var tracking_row = {{ tracking_row }};
+
+function addTracking() {
+  html  = '<tr id="tracking-row-' + tracking_row + '">';
+  html += '  <td class="text-left">';
+  html += '    <select name="module_ll_cdek_exchange_trackings[' + tracking_row + '][shipping_status]" class="form-control">';
+  {% for id, status in statuses %}
+  html += '      <option value="{{ id }}">{{ status.title }}</option>';
+  {% endfor %}
+  html += '    </select>';
+  html += '  </td>';
+  html += '  <td class="text-left">';
+  html += '    <select name="module_ll_cdek_exchange_trackings[' + tracking_row + '][order_status]" class="form-control">';
+  {% for status in order_statuses %}
+  html += '      <option value="{{ status.order_status_id }}">{{ status.name }}</option>';
+  {% endfor %}
+  html += '    </select>';
+  html += '  </td>';
+  html += '  <td class="text-left">';
+  html += '    <table class="table" style="background: transparent;">';
+  html += '      <tr>';
+  html += '        <td style="border: none;">';
+  html += '          <div class="form-group">';
+  html += '            <label class="col-sm-6 control-label">{{ text_notify }}</label>';
+  html += '            <div class="col-sm-6">';
+  html += '              <div class="btn-group" data-toggle="buttons">';
+  html += '               <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_trackings[' + tracking_row + '][notify]" value="0" autocomplete="off" checked="checked">{{ text_no }}</label>';
+  html += '               <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_trackings[' + tracking_row + '][notify]" value="1" autocomplete="off">{{ text_yes }}</label>';
+  html += '            </div>';
+  html += '          </div>';
+  html += '        </td>';
+  html += '        <td style="border: none;">';
+  {% for language in languages %}
+  html += '          <div class="input-group pull-left">';
+  html += '            <span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>';
+  html += '            <textarea name="module_ll_cdek_exchange_trackings[' + tracking_row + '][comment][{{ language.language_id }}]" class="form-control" rows="3"></textarea>';
+  html += '          </div>';
+  {% endfor %}
+  html += '        </td>';
+  html += '      </tr>';
+  html += '      <tr>';
+  html += '        <td>';
+  html += '          <div class="form-group">';
+  html += '            <label class="col-sm-6 control-label">{{ text_notify_email }}</label>';
+  html += '            <div class="col-sm-6">';
+  html += '              <div class="btn-group" data-toggle="buttons">';
+  html += '               <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_trackings[' + tracking_row + '][notify_email]" value="0" autocomplete="off" checked="checked">{{ text_no }}</label>';
+  html += '               <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_trackings[' + tracking_row + '][notify_email]" value="1" autocomplete="off">{{ text_yes }}</label>';
+  html += '            </div>';
+  html += '          </div>';
+  html += '        </td>';
+  html += '        <td>';
+  {% for language in languages %}
+  html += '          <div class="input-group pull-left">';
+  html += '            <span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>';
+  html += '            <textarea name="module_ll_cdek_exchange_trackings[' + tracking_row + '][email][{{ language.language_id }}]" class="form-control" rows="3"></textarea>';
+  html += '          </div>';
+  {% endfor %}
+  html += '        </td>';
+  html += '      </tr>';
+  html += '      <tr>';
+  html += '        <td>';
+  html += '          <div class="form-group">';
+  html += '            <label class="col-sm-6 control-label">{{ text_notify_sms }}</label>';
+  html += '            <div class="col-sm-6">';
+  html += '              <div class="btn-group" data-toggle="buttons">';
+  html += '               <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_trackings[' + tracking_row + '][notify_sms]" value="0" autocomplete="off" checked="checked">{{ text_no }}</label>';
+  html += '               <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_trackings[' + tracking_row + '][notify_sms]" value="1" autocomplete="off">{{ text_yes }}</label>';
+  html += '            </div>';
+  html += '          </div>';
+  html += '        </td>';
+  html += '        <td>';
+  {% for language in languages %}
+  html += '          <div class="input-group pull-left">';
+  html += '            <span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>';
+  html += '            <textarea name="module_ll_cdek_exchange_trackings[' + tracking_row + '][sms][{{ language.language_id }}]" class="form-control" rows="3"></textarea>';
+  html += '          </div>';
+  {% endfor %}
+  html += '        </td>';
+  html += '      </tr>';
+  html += '    </table>';
+  html += '  </td>';
+  html += '  <td class="text-right"><button type="button" onclick="$(\'#tracking-row-' + tracking_row  + '\').remove();" class="btn btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button></td>';
+  html += '</tr>';
+
+  $('#trackings > tbody').append(html);
+
+  tracking_row++;
+}
+
+var alert_row = {{ alert_row }};
+
+function addAlert() {
+  html  = '<tr id="alert-row-' + alert_row + '">';
+  html += '  <td class="text-left">';
+  html += '    <select name="module_ll_cdek_exchange_alerts[' + alert_row + '][start_status]" class="form-control">';
+  {% for id, status in statuses %}
+  {% if id not in ['-1', '0', '999'] %}
+  html += '      <option value="{{ id }}">{{ status.title }}</option>';
+  {% endif %}
+  {% endfor %}
+  html += '    </select>';
+  html += '  </td>';
+  html += '  <td class="text-left">';
+  html += '    <input type="text" name="module_ll_cdek_exchange_alerts[' + alert_row + '][delay]" class="form-control" value="" />';
+  html += '  </td>';
+  html += '  <td class="text-left">';
+  html += '    <div class="well well-sm" style="height: 300px; overflow: auto; margin: 0;">';
+  {% for id, status in statuses %}
+  {% if id not in ['-1', '0', '999'] %}
+  html += '      <div class="checkbox">';
+  html += '        <label><input type="checkbox" name="module_ll_cdek_exchange_alerts[' + alert_row + '][stop_status][]" value="{{ id }}" /> {{ status.title }}</label>';
+  html += '      </div>';
+  {% endif %}
+  {% endfor %}
+  html += '    </div>';
+  html += '  </td>';
+  html += '  <td class="text-left">';
+  html += '    <table class="table" style="background: transparent;">';
+  html += '      <tr>';
+  html += '        <td style="border: none;">';
+  html += '          <div class="form-group">';
+  html += '            <label class="col-sm-6 control-label">{{ text_notify_email }}</label>';
+  html += '            <div class="col-sm-6">';
+  html += '              <div class="btn-group" data-toggle="buttons">';
+  html += '               <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_alerts[' + alert_row + '][notify_email]" value="0" autocomplete="off" checked="checked">{{ text_no }}</label>';
+  html += '               <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_alerts[' + alert_row + '][notify_email]" value="1" autocomplete="off">{{ text_yes }}</label>';
+  html += '            </div>';
+  html += '          </div>';
+  html += '        </td>';
+  html += '        <td style="border: none;">';
+  {% for language in languages %}
+  html += '          <div class="input-group pull-left">';
+  html += '            <span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>';
+  html += '            <textarea name="module_ll_cdek_exchange_alerts[' + alert_row + '][email][{{ language.language_id }}]" class="form-control" rows="3"></textarea>';
+  html += '          </div>';
+  {% endfor %}
+  html += '        </td>';
+  html += '      </tr>';
+  html += '      <tr>';
+  html += '        <td>';
+  html += '          <div class="form-group">';
+  html += '            <label class="col-sm-6 control-label">{{ text_notify_sms }}</label>';
+  html += '            <div class="col-sm-6">';
+  html += '              <div class="btn-group" data-toggle="buttons">';
+  html += '               <label class="btn btn-default active"><input type="radio" name="module_ll_cdek_exchange_alerts[' + alert_row + '][notify_sms]" value="0" autocomplete="off" checked="checked">{{ text_no }}</label>';
+  html += '               <label class="btn btn-default"><input type="radio" name="module_ll_cdek_exchange_alerts[' + alert_row + '][notify_sms]" value="1" autocomplete="off">{{ text_yes }}</label>';
+  html += '            </div>';
+  html += '          </div>';
+  html += '        </td>';
+  html += '        <td>';
+  {% for language in languages %}
+  html += '          <div class="input-group pull-left">';
+  html += '            <span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>';
+  html += '            <textarea name="module_ll_cdek_exchange_alerts[' + alert_row + '][sms][{{ language.language_id }}]" class="form-control" rows="3"></textarea>';
+  html += '          </div>';
+  {% endfor %}
+  html += '        </td>';
+  html += '      </tr>';
+  html += '    </table>';
+  html += '  </td>';
+  html += '  <td class="text-right"><button type="button" onclick="$(\'#alert-row-' + alert_row  + '\').remove();" class="btn btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button></td>';
+  html += '</tr>';
+
+  $('#alerts > tbody').append(html);
+
+  alert_row++;
+}
+
+function getCronKey() {
+  $.ajax({
+    url: '{{ get_cron_key }}',
+    dataType: 'json',
+    beforeSend: function() {
+      $('#cron-key i').addClass('fa-spin');
+      $('.alert').remove();
+    },
+    success: function(json) {
+      $('#cron-key i').removeClass('fa-spin');
+
+      if (json['success']) {
+        $('input[name=module_ll_cdek_exchange_cron_key]').val(json['success']['cron_key']);
+        $('input[name=module_ll_cdek_exchange_update_url]').val(json['success']['update_url']);
+        $('input[name=module_ll_cdek_exchange_update_pvz_url]').val(json['success']['update_pvz_url']);
+      }
+
+      if (json['error']) {
+        $('#tab-cron').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+        $('html, body').animate({ scrollTop: 0 });
+      }
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+    }
+  });
+}
+
+function logLoad() {
+  $.ajax({
+    url: '{{ load_log }}',
+    dataType: 'json',
+    beforeSend: function() {
+      $('#log-load i').addClass('fa-spin');
+      $('.alert').remove();
+    },
+    success: function(json) {
+      $('#log-load i').removeClass('fa-spin');
+
+      if (json['success']) {
+        $('#log').css('height', $(window).height() - 100);
+        $('#log').val(json['success']);
+        $("html, body").animate({ scrollTop: $('#log-container').offset().top });
+      }
+
+      if (json['error']) {
+        $('#tab-log').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+        $('html, body').animate({ scrollTop: 0 });
+      }
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+    }
+  });
+}
+
+function logDownload() {
+  $.ajax({
+    url: '{{ download_log }}',
+    dataType: 'json',
+    beforeSend: function() {
+      $('#log-download i').addClass('fa-spin');
+      $('.alert').remove();
+    },
+    success: function(json) {
+      $('#log-download i').removeClass('fa-spin');
+
+      if (json['success']) {
+        window.open(json['success']);
+      }
+
+      if (json['error']) {
+        $('#tab-log').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+        $('html, body').animate({ scrollTop: 0 });
+      }
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+    }
+  });
+}
+
+function logClear() {
+  $.ajax({
+    url: '{{ clear_log }}',
+    dataType: 'json',
+    beforeSend: function() {
+      $('#log-clear i').addClass('fa-spin');
+      $('.alert').remove();
+    },
+    success: function(json) {
+      $('#log-clear i').removeClass('fa-spin');
+
+      if (json['success']) {
+        $('#tab-log').prepend('<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+        $('#log').css('height', '');
+        $('#log').val('');
+        $('html, body').animate({ scrollTop: 0 });
+      }
+
+      if (json['error']) {
+        $('#tab-log').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+        $('html, body').animate({ scrollTop: 0 });
+      }
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+    }
+  });
+}
+
+$('.date').datetimepicker({
+  pickTime: false,
+  locale: 'ru',
+  format: 'HH:mm',
+});
+
+$('.time').datetimepicker({
+  pickDate: false,
+  locale: 'ru',
+  format: 'HH:mm',
+});
+</script>
+{% endif %}
+{{ footer }} 

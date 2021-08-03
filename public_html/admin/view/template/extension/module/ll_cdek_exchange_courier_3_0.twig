@@ -1,0 +1,184 @@
+{#
+/**
+ * @author    p0v1n0m <support@lutylab.ru>
+ * @license   Commercial
+ * @link      https://lutylab.ru
+ */
+#}
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="button" onclick="$('#form').submit()" class="btn btn-success"><i class="fa fa-play"></i> {{ button_export }}</button>
+        <a href="{{ shipping }}" data-toggle="tooltip" title="{{ button_shipping }}" class="btn btn-default"><i class="fa fa-truck"></i></a>
+        <a href="{{ exchange }}" data-toggle="tooltip" title="{{ button_exchange }}" class="btn btn-default"><i class="fa fa-exchange"></i></a>
+        <a href="{{ order }}" data-toggle="tooltip" title="{{ button_order }}" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
+      <h1>{{ heading_title_courier }}</h1>
+      <ol class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+          <input type="hidden" name="CallCourier[Date]" value="{{ courier.send_date }}" />
+          <input type="hidden" name="CallCourier[Account]" value="{{ courier.account }}" />
+          <input type="hidden" name="CallCourier[Secure]" value="{{ courier.secure }}" />
+          <input type="hidden" name="CallCourier[CallCount]" value="1" />
+          <input type="hidden" name="CallCourier[Call][0][DispatchNumber]" value="{{ courier.dispatch_number }}" />
+          <input type="hidden" name="CallCourier[Call][0][SendCityCode]" value="{{ courier.send_city_code }}" />
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Заказ</label>
+                <div class="col-sm-10">
+                  <a href="{{ courier.order_link }}" target="_blank" class="btn">{{ courier.order_id }}</a>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Отправление</label>
+                <div class="col-sm-10">
+                  <a href="{{ courier.dispatch_link }}" target="_blank" class="btn">{{ courier.dispatch_number }}</a>
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label">Дата ожидания курьера</label>
+                <div class="col-sm-10">
+                  <div class="input-group date">
+                    <input type="text" name="CallCourier[Call][0][Date]" value="{{ courier.date }}" data-date-format="YYYY-MM-DD" class="form-control" />
+                    <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label">Время ожидания курьера</label>
+                <div class="col-sm-10">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="input-group time">
+                        <div class="input-group-addon">с</div>
+                        <input type="text" name="CallCourier[Call][0][TimeBeg]" value="{{ courier.time_beg }}" class="form-control" />
+                        <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="input-group time">
+                        <div class="input-group-addon">до</div>
+                        <input type="text" name="CallCourier[Call][0][TimeEnd]" value="{{ courier.time_end }}" class="form-control" />
+                        <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Время обеда</label>
+                <div class="col-sm-10">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="input-group time">
+                        <div class="input-group-addon">с</div>
+                        <input type="text" name="CallCourier[Call][0][LunchBeg]" value="{{ courier.lunch_beg }}" class="form-control" />
+                        <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="input-group time">
+                        <div class="input-group-addon">до</div>
+                        <input type="text" name="CallCourier[Call][0][LunchEnd]" value="{{ courier.lunch_end }}" class="form-control" />
+                        <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                      </div>
+                    </div>
+                  </div>
+                  <small class="form-text text-muted">Заполнять только если входит во временной диапазон времени ожидания курьера.</small>
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label">Город отправителя</label>
+                <div class="col-sm-10">
+                  <input type="text" value="{{ courier.city }}" class="form-control" readonly />
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label">Улица отправителя</label>
+                <div class="col-sm-10">
+                  <input type="text" name="CallCourier[Call][0][Address][Street]" value="{{ courier.street }}" class="form-control" maxlength="50" />
+                  <small class="form-text text-muted">На один адрес может быть не более одного вызова курьера в день. Не надо указывать префиксы значений, вроде «ул.».</small>
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label">Дом, корпус, строение отправителя</label>
+                <div class="col-sm-10">
+                  <input type="text" name="CallCourier[Call][0][Address][House]" value="{{ courier.house }}" class="form-control" maxlength="30" />
+                  <small class="form-text text-muted">Не надо указывать префиксы значений, вроде «дом».</small>
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label">Квартира/офис отправителя</label>
+                <div class="col-sm-10">
+                  <input type="text" name="CallCourier[Call][0][Address][Flat]" value="{{ courier.flat }}" class="form-control" maxlength="10" />
+                  <small class="form-text text-muted">Не надо указывать префиксы значений, вроде «кв.».</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">ФИО отправителя</label>
+                <div class="col-sm-10">
+                  <input type="text" name="CallCourier[Call][0][SenderName]" value="{{ courier.sender_name }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Телефон отправителя</label>
+                <div class="col-sm-10">
+                  <input type="text" name="CallCourier[Call][0][SendPhone]" value="{{ courier.send_phone }}" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Комментарий</label>
+                <div class="col-sm-10">
+                  <textarea type="text" name="CallCourier[Call][0][Comment]" class="form-control">{{ courier.comment }}</textarea>
+                  <small class="form-text text-muted">Описание груза.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="panel-footer">
+        <img src="../image/catalog/{{ m }}/logo.png" class="pull-right">
+        <span class="label label-default">{{ m }}</span>
+        <span class="label label-default">{{ version }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$('.date').datetimepicker({
+  pickTime: false,
+  locale: 'ru',
+  format: 'HH:mm',
+});
+
+$('.time').datetimepicker({
+  pickDate: false,
+  locale: 'ru',
+  format: 'HH:mm',
+});
+</script>
+{{ footer }}

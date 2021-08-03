@@ -1,0 +1,17 @@
+/****************************Fast order (Singleclick)*****************************/	
+/*modal*/
+body .modal-content{
+	border-radius:1px;
+	background-color:#fff;
+}
+body .modal-header{padding:30px; border:0; }
+body .modal-body{ padding:0 30px 30px;}
+
+.fast_order_form input::-webkit-input-placeholder, #fast_order_form textarea::-webkit-input-placeholder {color: #1e1a18;} 
+.fast_order_form input::-moz-placeholder, #fast_order_form textarea::-moz-placeholder {color: #1e1a18;}
+
+ input#pr{ display:inline-block; vertical-align:top; width:160px; margin-bottom:0}
+
+.fast_order_result{ min-height:30px; margin-bottom:0; padding-top:10px;}
+.singleclick_error{ color: #C00; font-size:1.2em; }
+.singleclick_success{ color:#4a3f39; font-size:1.2em; font-weight:bold;}

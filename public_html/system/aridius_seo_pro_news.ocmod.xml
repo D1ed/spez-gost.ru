@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+  <name>seo_pro_aridius_news</name>
+  <code>seo_pro_aridius_news</code>
+  <version>v_1</version>
+  <author>mrz(aridius)</author>
+<file path="catalog/controller/startup/seo_pro.php">
+<operation>
+      <search><![CDATA[
+					if (isset($this->request->get['product_id'])) {
+      ]]></search>
+      <add position="before"><![CDATA[
+				   if (isset($this->request->get['aridius_news_id'])) {			
+				   $this->request->get['route'] = 'information/aridius_news';
+				   } else
+      ]]></add>
+</operation>
+<operation>
+      <search><![CDATA[
+                   case 'product/product':
+      ]]></search>
+      <add position="before"><![CDATA[
+			       case 'information/aridius_news':
+				   if (isset($data['aridius_news_id'])) {
+				   $tmp = $data;
+				   $data = array();
+				   $data['aridius_news_id'] = $tmp['aridius_news_id'];
+				   }
+                   break;
+      ]]></add>
+</operation>
+<operation>
+      <search><![CDATA[
+                   case 'product_id':
+      ]]></search>
+      <add position="before"><![CDATA[
+                   case 'aridius_news_id':
+      ]]></add>
+</operation>
+<!-- comments pagination -->
+<operation>
+      <search><![CDATA[
+					case 'product/product/review':
+      ]]></search>
+      <add position="before"><![CDATA[
+				    case 'information/aridius_news/review':
+      ]]></add>
+</operation>
+</file> 
+</modification>

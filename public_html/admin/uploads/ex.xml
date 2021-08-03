@@ -1,0 +1,1179 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+xmlns:html="http://www.w3.org/TR/REC-html40">
+<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+ <Author>usergio</Author>
+ <LastAuthor>me</LastAuthor>
+ <Created>2021-03-04 19:27:43</Created>
+ <LastSaved>2021-03-04 19:27:43</LastSaved>
+ <Company>https://spez-gost.ru/</Company>
+ <Version>12.00</Version>
+</DocumentProperties>
+<ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+ <WindowHeight>12396</WindowHeight>
+ <WindowWidth>23256</WindowWidth>
+ <WindowTopX>180</WindowTopX>
+ <WindowTopY>456</WindowTopY>
+ <ProtectStructure>False</ProtectStructure>
+ <ProtectWindows>False</ProtectWindows>
+</ExcelWorkbook>
+<Styles>
+ <Style ss:ID="Default" ss:Name="Normal">
+ <Alignment ss:Vertical="Bottom"/>
+ <Borders/>
+ <Font ss:FontName="Calibri" ss:Size="11"/>
+ <Interior/>
+ <NumberFormat/>
+ <Protection/>
+</Style>
+<Style ss:ID="s16">
+ <NumberFormat ss:Format="Fixed"/>
+</Style>
+<Style ss:ID="s17">
+ <NumberFormat ss:Format="0"/>
+</Style>
+<Style ss:ID="s18">
+ <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"/>
+</Style>
+<Style ss:ID="s19">
+ <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"/>
+ <NumberFormat ss:Format="0"/>
+</Style>
+<Style ss:ID="s20">
+<Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+<Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11" ss:Bold="1"/>
+</Style>
+<Style ss:ID="s21">
+ <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"/>
+ <NumberFormat ss:Format="0.0000"/>
+</Style>
+<Style ss:ID="s22">
+ <NumberFormat ss:Format="0.0000"/>
+</Style>
+<Style ss:ID="s23">
+ <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"/>
+ <NumberFormat/>
+</Style>
+<Style ss:ID="s24">
+ <NumberFormat/>
+</Style>
+<Style ss:ID="s25">
+ <NumberFormat ss:Format="Standard"/>
+</Style>
+</Styles>
+<Worksheet ss:Name="ERC price">
+<Table ss:ExpandedColumnCount="47" ss:ExpandedRowCount="1" x:FullColumns="1"
+           x:FullRows="1" ss:DefaultRowHeight="14">
+ <Column ss:AutoFitWidth="0" ss:Width="80"/>
+ <Column ss:AutoFitWidth="0" ss:Width="120"/>
+ <Column ss:AutoFitWidth="0" ss:Width="73"/>
+ <Column ss:AutoFitWidth="0" ss:Width="120"/>
+ <Column ss:AutoFitWidth="0" ss:Width="200"/>
+ <Column ss:AutoFitWidth="0" ss:Width="80"/>
+ <Column ss:AutoFitWidth="0" ss:Width="60"/>
+ <Column ss:AutoFitWidth="0" ss:Width="80"/>
+ <Column ss:AutoFitWidth="0" ss:Width="80"/>
+ <Column ss:AutoFitWidth="0" ss:Width="80"/>
+ <Column ss:AutoFitWidth="0" ss:Width="180"/>
+ <Column ss:AutoFitWidth="0" ss:Width="180"/>
+ <Column ss:AutoFitWidth="0" ss:Width="80"/>
+ <Column ss:AutoFitWidth="0" ss:Width="120"/>
+ <Column ss:AutoFitWidth="0" ss:Width="80"/>
+ <Column ss:AutoFitWidth="0" ss:Width="120"/>
+ <Column ss:AutoFitWidth="0" ss:Width="80"/>
+ <Column ss:AutoFitWidth="0" ss:Width="120"/>
+ <Column ss:AutoFitWidth="0" ss:Width="200"/>
+ <Column ss:AutoFitWidth="0" ss:Width="80"/>
+ <Column ss:AutoFitWidth="0" ss:Width="100"/>
+ <Column ss:AutoFitWidth="0" ss:Width="100"/>
+ <Column ss:AutoFitWidth="0" ss:Width="100"/>
+ <Column ss:AutoFitWidth="0" ss:Width="100"/>
+ <Column ss:AutoFitWidth="0" ss:Width="100"/>
+ <Column ss:AutoFitWidth="0" ss:Width="100"/>
+ <Column ss:AutoFitWidth="0" ss:Width="100"/>
+ <Column ss:AutoFitWidth="0" ss:Width="100"/>
+<Row>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Order ID</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Invoice</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Product Code</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Articul (SKU)</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Product Name</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Price</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Quantity</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">SubTotal</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Total</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Cost</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Comment</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Shipping Title</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Shipping</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Tax Title</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Tax</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Tax Title</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Tax</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Buyer</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Address</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Phone</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Status1</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Date1</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Status2</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Date2</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Status3</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Date3</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Status4</Data></Cell>
+ <Cell ss:StyleID="s20"><Data ss:Type="String">Date4</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">9572</Data></Cell>
+<Cell><Data ss:Type="String">INV-2012-000</Data></Cell>
+<Cell><Data ss:Type="String">214005-01</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Детские валенки Nordman с натуральным мехом на липучке</Data></Cell>
+<Cell><Data ss:Type="String">2390</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2390</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Курьерская (1-2 дня)</Data></Cell>
+<Cell><Data ss:Type="String">299.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Рынейская Наталья </Data></Cell>
+<Cell><Data ss:Type="String">Москва, б-р Яна Райниса 1 кв 262 </Data></Cell>
+<Cell><Data ss:Type="String">89687487776</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-01 15:48:05</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-01 16:17:14</Data></Cell>
+<Cell><Data ss:Type="String">Подтвержден с изменениями</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-01 17:43:08</Data></Cell>
+<Cell><Data ss:Type="String">Отмена, не дозвонится</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-02 11:29:43</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">2689.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">9682</Data></Cell>
+<Cell><Data ss:Type="String">INV-2012-000</Data></Cell>
+<Cell><Data ss:Type="String">214001-01</Data></Cell>
+<Cell><Data ss:Type="String">214001-01</Data></Cell>
+<Cell><Data ss:Type="String">Детские валенки Nordman из натурального войлока</Data></Cell>
+<Cell><Data ss:Type="String">2190</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2190</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Доставка почтой (7-14 дней)</Data></Cell>
+<Cell><Data ss:Type="String">299.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Татьяна Козлова </Data></Cell>
+<Cell><Data ss:Type="String"> </Data></Cell>
+<Cell><Data ss:Type="String">9114023067</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-06 11:05:32</Data></Cell>
+<Cell><Data ss:Type="String">Отправлен курьером ИМЛ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-06 17:17:44</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">2489.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">9843</Data></Cell>
+<Cell><Data ss:Type="String">INV-2012-000</Data></Cell>
+<Cell><Data ss:Type="String">214005-01</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Детские валенки Nordman с натуральным мехом на липучке</Data></Cell>
+<Cell><Data ss:Type="String">2390</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2390</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Олеся </Data></Cell>
+<Cell><Data ss:Type="String">Москва Видное, Советская 6А, кв 75, под 3, эт 1, код к1666 </Data></Cell>
+<Cell><Data ss:Type="String">89150616149</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-09 11:25:32</Data></Cell>
+<Cell><Data ss:Type="String">Подтвержден с изменениями</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-09 15:22:40</Data></Cell>
+<Cell><Data ss:Type="String">Отмена, не дозвонится</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-10 11:03:30</Data></Cell>
+<Cell><Data ss:Type="String">Потерянный заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-10 15:40:22</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">9843</Data></Cell>
+<Cell><Data ss:Type="String">INV-2012-000</Data></Cell>
+<Cell><Data ss:Type="String">dostavka</Data></Cell>
+<Cell><Data ss:Type="String">dostavka</Data></Cell>
+<Cell><Data ss:Type="String">Доставка</Data></Cell>
+<Cell><Data ss:Type="String">299</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">299</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Олеся </Data></Cell>
+<Cell><Data ss:Type="String">Москва Видное, Советская 6А, кв 75, под 3, эт 1, код к1666 </Data></Cell>
+<Cell><Data ss:Type="String">89150616149</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-09 11:25:32</Data></Cell>
+<Cell><Data ss:Type="String">Подтвержден с изменениями</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-09 15:22:40</Data></Cell>
+<Cell><Data ss:Type="String">Отмена, не дозвонится</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-10 11:03:30</Data></Cell>
+<Cell><Data ss:Type="String">Потерянный заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-10 15:40:22</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">2689.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">9858</Data></Cell>
+<Cell><Data ss:Type="String">INV-2012-000</Data></Cell>
+<Cell><Data ss:Type="String">214005-01</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Детские валенки Nordman с натуральным мехом на липучке</Data></Cell>
+<Cell><Data ss:Type="String">2390</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2390</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">еКАТЕРИНА </Data></Cell>
+<Cell><Data ss:Type="String"> </Data></Cell>
+<Cell><Data ss:Type="String">89036225926</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-09 14:58:09</Data></Cell>
+<Cell><Data ss:Type="String">Ждёт наличие</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-09 16:35:27</Data></Cell>
+<Cell><Data ss:Type="String">Отправлен курьером ИМЛ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-22 15:47:01</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">9858</Data></Cell>
+<Cell><Data ss:Type="String">INV-2012-000</Data></Cell>
+<Cell><Data ss:Type="String">214005-01</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Детские валенки Nordman с натуральным мехом на липучке</Data></Cell>
+<Cell><Data ss:Type="String">2390</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2390</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">еКАТЕРИНА </Data></Cell>
+<Cell><Data ss:Type="String"> </Data></Cell>
+<Cell><Data ss:Type="String">89036225926</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-09 14:58:09</Data></Cell>
+<Cell><Data ss:Type="String">Ждёт наличие</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-09 16:35:27</Data></Cell>
+<Cell><Data ss:Type="String">Отправлен курьером ИМЛ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-22 15:47:01</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">4780.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">9976</Data></Cell>
+<Cell><Data ss:Type="String">INV-2012-000</Data></Cell>
+<Cell><Data ss:Type="String">214005-01</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Детские валенки Nordman с натуральным мехом на липучке</Data></Cell>
+<Cell><Data ss:Type="String">2390</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2390</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Олеся Нога </Data></Cell>
+<Cell><Data ss:Type="String">Москва, МКАД, 26-й километр, 5с3, Тойота центр Каширский </Data></Cell>
+<Cell><Data ss:Type="String">89150616149</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-12 15:35:31</Data></Cell>
+<Cell><Data ss:Type="String">Подтвержден с изменениями</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-14 13:25:44</Data></Cell>
+<Cell><Data ss:Type="String">Отмена, не дозвонится</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-14 13:27:10</Data></Cell>
+<Cell><Data ss:Type="String">Потерянный заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-14 16:07:17</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">9976</Data></Cell>
+<Cell><Data ss:Type="String">INV-2012-000</Data></Cell>
+<Cell><Data ss:Type="String">dostavka</Data></Cell>
+<Cell><Data ss:Type="String">dostavka</Data></Cell>
+<Cell><Data ss:Type="String">Доставка</Data></Cell>
+<Cell><Data ss:Type="String">299</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">299</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Олеся Нога </Data></Cell>
+<Cell><Data ss:Type="String">Москва, МКАД, 26-й километр, 5с3, Тойота центр Каширский </Data></Cell>
+<Cell><Data ss:Type="String">89150616149</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-12 15:35:31</Data></Cell>
+<Cell><Data ss:Type="String">Подтвержден с изменениями</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-14 13:25:44</Data></Cell>
+<Cell><Data ss:Type="String">Отмена, не дозвонится</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-14 13:27:10</Data></Cell>
+<Cell><Data ss:Type="String">Потерянный заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-14 16:07:17</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">2689.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">10065</Data></Cell>
+<Cell><Data ss:Type="String">INV-2012-000</Data></Cell>
+<Cell><Data ss:Type="String">214001-01</Data></Cell>
+<Cell><Data ss:Type="String">214001-01</Data></Cell>
+<Cell><Data ss:Type="String">Детские валенки Nordman из натурального войлока</Data></Cell>
+<Cell><Data ss:Type="String">2190</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2190</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Екатерина </Data></Cell>
+<Cell><Data ss:Type="String"> </Data></Cell>
+<Cell><Data ss:Type="String">89154311149</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-17 16:59:07</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-17 17:09:18</Data></Cell>
+<Cell><Data ss:Type="String">Ждёт наличие</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-17 17:12:44</Data></Cell>
+<Cell><Data ss:Type="String">Отправлен курьером ИМЛ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-22 16:57:55</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">10065</Data></Cell>
+<Cell><Data ss:Type="String">INV-2012-000</Data></Cell>
+<Cell><Data ss:Type="String">315003-01 </Data></Cell>
+<Cell><Data ss:Type="String">315003-01 </Data></Cell>
+<Cell><Data ss:Type="String">Зимние детские сапоги Nordman LUMI</Data></Cell>
+<Cell><Data ss:Type="String">3190</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">3190</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Екатерина </Data></Cell>
+<Cell><Data ss:Type="String"> </Data></Cell>
+<Cell><Data ss:Type="String">89154311149</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-17 16:59:07</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-17 17:09:18</Data></Cell>
+<Cell><Data ss:Type="String">Ждёт наличие</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-17 17:12:44</Data></Cell>
+<Cell><Data ss:Type="String">Отправлен курьером ИМЛ</Data></Cell>
+<Cell><Data ss:Type="String">2016-11-22 16:57:55</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">5380.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">10344</Data></Cell>
+<Cell><Data ss:Type="String">INV-2012-000</Data></Cell>
+<Cell><Data ss:Type="String">214001-01</Data></Cell>
+<Cell><Data ss:Type="String">214001-01</Data></Cell>
+<Cell><Data ss:Type="String">Детские валенки Nordman из натурального войлока</Data></Cell>
+<Cell><Data ss:Type="String">2190</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2190</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Варламова </Data></Cell>
+<Cell><Data ss:Type="String"> </Data></Cell>
+<Cell><Data ss:Type="String">89851591959</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-12-04 15:16:37</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-12-05 15:32:03</Data></Cell>
+<Cell><Data ss:Type="String">Отправлен курьером ИМЛ</Data></Cell>
+<Cell><Data ss:Type="String">2016-12-06 12:03:42</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">2190.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">10481</Data></Cell>
+<Cell><Data ss:Type="String">INV-2012-000</Data></Cell>
+<Cell><Data ss:Type="String">214001-01</Data></Cell>
+<Cell><Data ss:Type="String">214001-01</Data></Cell>
+<Cell><Data ss:Type="String">Детские валенки Nordman из натурального войлока</Data></Cell>
+<Cell><Data ss:Type="String">2190</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2190</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Кознова Юлия </Data></Cell>
+<Cell><Data ss:Type="String"> </Data></Cell>
+<Cell><Data ss:Type="String">8-916-811-5141</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-12-12 21:07:04</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2016-12-13 12:04:29</Data></Cell>
+<Cell><Data ss:Type="String">Отправлен курьером ИМЛ</Data></Cell>
+<Cell><Data ss:Type="String">2016-12-13 12:14:51</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">2190.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">10772</Data></Cell>
+<Cell><Data ss:Type="String">INV-2012-000</Data></Cell>
+<Cell><Data ss:Type="String">214005-01</Data></Cell>
+<Cell><Data ss:Type="String">214005-01</Data></Cell>
+<Cell><Data ss:Type="String">Детские валенки Nordman c натуральным мехом на липучке</Data></Cell>
+<Cell><Data ss:Type="String">2390</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2390</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">шевченко ирина </Data></Cell>
+<Cell><Data ss:Type="String">ПВ  пр. Гражданский, д. 118, к. 1 Санкт-Петербург</Data></Cell>
+<Cell><Data ss:Type="String">89119060496</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-01-17 16:40:12</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-01-17 16:41:10</Data></Cell>
+<Cell><Data ss:Type="String">Подтвержден с изменениями</Data></Cell>
+<Cell><Data ss:Type="String">2017-01-18 16:13:29</Data></Cell>
+<Cell><Data ss:Type="String">Отмена, не дозвонится</Data></Cell>
+<Cell><Data ss:Type="String">2017-01-19 12:57:52</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">10772</Data></Cell>
+<Cell><Data ss:Type="String">INV-2012-000</Data></Cell>
+<Cell><Data ss:Type="String">dostavka</Data></Cell>
+<Cell><Data ss:Type="String">dostavka</Data></Cell>
+<Cell><Data ss:Type="String">Доставка</Data></Cell>
+<Cell><Data ss:Type="String">149</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">149</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">шевченко ирина </Data></Cell>
+<Cell><Data ss:Type="String">ПВ  пр. Гражданский, д. 118, к. 1 Санкт-Петербург</Data></Cell>
+<Cell><Data ss:Type="String">89119060496</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-01-17 16:40:12</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-01-17 16:41:10</Data></Cell>
+<Cell><Data ss:Type="String">Подтвержден с изменениями</Data></Cell>
+<Cell><Data ss:Type="String">2017-01-18 16:13:29</Data></Cell>
+<Cell><Data ss:Type="String">Отмена, не дозвонится</Data></Cell>
+<Cell><Data ss:Type="String">2017-01-19 12:57:52</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">2539.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">14768</Data></Cell>
+<Cell><Data ss:Type="String">INV-2017-000</Data></Cell>
+<Cell><Data ss:Type="String">215008-01</Data></Cell>
+<Cell><Data ss:Type="String">out-415008-01</Data></Cell>
+<Cell><Data ss:Type="String">Детские дутики Nordman Jumper</Data></Cell>
+<Cell><Data ss:Type="String">2475</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2475</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">До пункта выдачи (2 дня)</Data></Cell>
+<Cell><Data ss:Type="String">215.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Вера </Data></Cell>
+<Cell><Data ss:Type="String">   Москва - GMT+0300</Data></Cell>
+<Cell><Data ss:Type="String">89163135642</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-09-18 10:29:01</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-09-18 11:40:09</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-09-18 12:06:55</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-09-18 14:21:46</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">2690.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">14943</Data></Cell>
+<Cell><Data ss:Type="String">INV-2017-000</Data></Cell>
+<Cell><Data ss:Type="String">114007-01</Data></Cell>
+<Cell><Data ss:Type="String">114010-03</Data></Cell>
+<Cell><Data ss:Type="String">Детские валенки Nordman с натуральным мехом на молнии</Data></Cell>
+<Cell><Data ss:Type="String">2790</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2790</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Курьерская (2 дня)</Data></Cell>
+<Cell><Data ss:Type="String">340.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Наталия </Data></Cell>
+<Cell><Data ss:Type="String">Москва, Ленинградский проспект, д. 26, стр.1   Москва - GMT+0300 (RTZ 2 (зима))</Data></Cell>
+<Cell><Data ss:Type="String">89169650222</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-09-26 13:43:22</Data></Cell>
+<Cell><Data ss:Type="String">Подтвержден с изменениями</Data></Cell>
+<Cell><Data ss:Type="String">2017-09-26 15:54:27</Data></Cell>
+<Cell><Data ss:Type="String">Подтвержден с изменениями</Data></Cell>
+<Cell><Data ss:Type="String">2017-09-26 15:55:32</Data></Cell>
+<Cell><Data ss:Type="String">Отмена, не дозвонится</Data></Cell>
+<Cell><Data ss:Type="String">2017-09-27 13:14:50</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">3130.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">15476</Data></Cell>
+<Cell><Data ss:Type="String">INV-2017-000</Data></Cell>
+<Cell><Data ss:Type="String">415008-01</Data></Cell>
+<Cell><Data ss:Type="String">out-415008-01</Data></Cell>
+<Cell><Data ss:Type="String">Детские дутики Nordman Jumper</Data></Cell>
+<Cell><Data ss:Type="String">2475</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2475</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">До пункта выдачи (3 дня)</Data></Cell>
+<Cell><Data ss:Type="String">225.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Оводкова Ксения  </Data></Cell>
+<Cell><Data ss:Type="String">   Санкт-Петербург - GMT+0300 (MSK)</Data></Cell>
+<Cell><Data ss:Type="String">89533404716</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-17 19:13:38</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-17 19:17:42</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-18 10:37:21</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-18 13:16:56</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">2700.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">15559</Data></Cell>
+<Cell><Data ss:Type="String">INV-2017-000</Data></Cell>
+<Cell><Data ss:Type="String">415008-01</Data></Cell>
+<Cell><Data ss:Type="String">out-415008-01</Data></Cell>
+<Cell><Data ss:Type="String">Детские дутики Nordman Jumper</Data></Cell>
+<Cell><Data ss:Type="String">2475</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2475</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Курьерская (2 дня)</Data></Cell>
+<Cell><Data ss:Type="String">215.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Новичихина Наталия </Data></Cell>
+<Cell><Data ss:Type="String">ПВЗ г. Москва, Зубовский бульвар, д. 16-20.   Москва - GMT+0300 (RTZ 2 (зима))</Data></Cell>
+<Cell><Data ss:Type="String">89067016245</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-20 16:57:56</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-20 17:03:53</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-20 18:00:36</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-24 10:57:27</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">15559</Data></Cell>
+<Cell><Data ss:Type="String">INV-2017-000</Data></Cell>
+<Cell><Data ss:Type="String">ТНД-1</Data></Cell>
+<Cell><Data ss:Type="String">out-ТНД-1</Data></Cell>
+<Cell><Data ss:Type="String">Термоноски Nordman Kids для высокой активности</Data></Cell>
+<Cell><Data ss:Type="String">290</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">290</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Курьерская (2 дня)</Data></Cell>
+<Cell><Data ss:Type="String">215.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Новичихина Наталия </Data></Cell>
+<Cell><Data ss:Type="String">ПВЗ г. Москва, Зубовский бульвар, д. 16-20.   Москва - GMT+0300 (RTZ 2 (зима))</Data></Cell>
+<Cell><Data ss:Type="String">89067016245</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-20 16:57:56</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-20 17:03:53</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-20 18:00:36</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-24 10:57:27</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">2980.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">15602</Data></Cell>
+<Cell><Data ss:Type="String">INV-2017-000</Data></Cell>
+<Cell><Data ss:Type="String">415008-01</Data></Cell>
+<Cell><Data ss:Type="String">out-415008-01</Data></Cell>
+<Cell><Data ss:Type="String">Детские дутики Nordman Jumper</Data></Cell>
+<Cell><Data ss:Type="String">2475</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2475</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Курьерская (2 дня)</Data></Cell>
+<Cell><Data ss:Type="String">349.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Аркадий Титов </Data></Cell>
+<Cell><Data ss:Type="String">г Москва, Нововладыкинский проезд, д 8 стр 5    Москва - GMT+0300 (MSK)</Data></Cell>
+<Cell><Data ss:Type="String">89165719220</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-22 18:45:14</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-22 19:06:01</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-23 10:29:35</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-23 10:46:58</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">2824.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String">15666</Data></Cell>
+<Cell><Data ss:Type="String">INV-2017-000</Data></Cell>
+<Cell><Data ss:Type="String">415008-01</Data></Cell>
+<Cell><Data ss:Type="String">out-415008-01</Data></Cell>
+<Cell><Data ss:Type="String">Детские дутики Nordman Jumper</Data></Cell>
+<Cell><Data ss:Type="String">2475</Data></Cell>
+<Cell><Data ss:Type="String">1</Data></Cell>
+<Cell><Data ss:Type="String">2475</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">До пункта выдачи (3 дня)</Data></Cell>
+<Cell><Data ss:Type="String">215.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String">Елена Ойцева </Data></Cell>
+<Cell><Data ss:Type="String">   Рязань - GMT+0300 (MSK)</Data></Cell>
+<Cell><Data ss:Type="String">89206362740</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-25 13:28:46</Data></Cell>
+<Cell><Data ss:Type="String">Новый заказ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-25 13:39:37</Data></Cell>
+<Cell><Data ss:Type="String">Отправлен курьером ИМЛ</Data></Cell>
+<Cell><Data ss:Type="String">2017-10-29 10:17:48</Data></Cell>
+</Row>
+<Row>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String"></Data></Cell>
+<Cell ss:StyleID="s20"><Data ss:Type="String">2690.0000</Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+<Cell><Data ss:Type="String"></Data></Cell>
+</Row>

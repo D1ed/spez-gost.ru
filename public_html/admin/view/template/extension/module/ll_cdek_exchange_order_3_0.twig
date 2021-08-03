@@ -1,0 +1,409 @@
+{#
+/**
+ * @author    p0v1n0m <support@lutylab.ru>
+ * @license   Commercial
+ * @link      https://lutylab.ru
+ */
+#}
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="button" onclick="$('#form').attr('action', '{{ send }}'); $('#form').submit();" data-toggle="tooltip" title="{{ button_create }}" class="btn btn-success disabled" id="button-send"><i class="fa fa-plus"></i></button>
+        <button type="button" onclick="$('#form').attr('action', '{{ update }}'); $('#form').submit();" data-toggle="tooltip" title="{{ button_update }}" class="btn btn-primary disabled" id="button-update"><i class="fa fa-refresh"></i></button>
+        <button type="button" onclick="$('#form').attr('action', '{{ invoice }}'); $('#form').submit();" data-toggle="tooltip" title="{{ button_invoice }}" class="btn btn-primary disabled" id="button-invoice"><i class="fa fa-print"></i></button>
+        <button type="button" onclick="$('#form').attr('action', '{{ sticker }}'); $('#form').submit();" data-toggle="tooltip" title="{{ button_sticker }}" class="btn btn-primary disabled" id="button-sticker"><i class="fa fa-sticky-note-o"></i></button>
+        <a href="{{ shipping }}" data-toggle="tooltip" title="{{ button_shipping }}" class="btn btn-default"><i class="fa fa-truck"></i></a>
+        <a href="{{ exchange }}" data-toggle="tooltip" title="{{ button_exchange }}" class="btn btn-default"><i class="fa fa-exchange"></i></a>
+        <a href="{{ orderr }}" data-toggle="tooltip" title="{{ button_order }}" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
+      <h1>{{ heading_title_order }}</h1>
+      <ol class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div class="well well-sm">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="input-group">
+                <div class="input-group-addon">{{ column_id }}</div>
+                <input type="text" name="filter_order_id" value="{{ filter_order_id }}" class="form-control" />
+              </div>
+              <br>
+              <div class="input-group">
+                <div class="input-group-addon">{{ column_to }}</div>
+                <input type="text" name="filter_to_name" value="{{ filter_to_name }}" class="form-control" />
+                <input type="hidden" name="filter_to" value="{{ filter_to }}" class="form-control" />
+              </div>
+              <br>
+              <div class="input-group">
+                <div class="input-group-addon">{{ entry_pvz }}</div>
+                <input type="text" name="filter_pvz" value="{{ filter_pvz }}" class="form-control" />
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="input-group">
+                <div class="input-group-addon">{{ column_total }}</div>
+                <input type="text" name="filter_total" value="{{ filter_total }}" class="form-control" />
+              </div>
+              <br>
+              <div class="input-group">
+                <div class="input-group-addon">{{ column_tariff }}</div>
+                <select name="filter_tariff" class="form-control">
+                  <option value="*"></option>
+                  {% for variant in variants %}
+                  <option value="{{ variant.code }}" {% if variant.code == filter_tariff %}selected="selected"{% endif %}>{{ variant.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <br>
+              <div class="input-group">
+                <div class="input-group-addon">{{ column_order_status }}</div>
+                <select name="filter_order_status" class="form-control">
+                  <option value="*"></option>
+                  {% for order_status in order_statuses %}
+                  <option value="{{ order_status.order_status_id }}" {% if order_status.order_status_id == filter_order_status %}selected="selected"{% endif %}>{{ order_status.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="input-group">
+                <div class="input-group-addon">{{ entry_number }}</div>
+                <input type="text" name="filter_number" value="{{ filter_number }}" class="form-control" />
+              </div>
+              <br>
+              <div class="input-group">
+                <div class="input-group-addon">{{ column_dispatch }}</div>
+                <input type="text" name="filter_dispatch" value="{{ filter_dispatch }}" class="form-control" />
+              </div>
+              <br>
+              <div class="input-group">
+                <div class="input-group-addon">{{ column_status }}</div>
+                <select name="filter_cdek_status" class="form-control">
+                  <option value="*"></option>
+                  {% for status_id, status in statuses %}
+                  <option value="{{ status_id }}" {% if status_id == filter_cdek_status and filter_cdek_status matches '/^[-+]?[0-9]*\\.?[0-9]+$/'%}selected="selected"{% endif %}>{{ status.title }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="input-group date">
+                <div class="input-group-addon">{{ column_date }}</div>
+                <input type="text" name="filter_date_added" value="{{ filter_date_added }}" class="form-control" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                </span>
+              </div>
+              <br>
+              <div class="input-group">
+                <div class="input-group-addon">{{ entry_customer }}</div>
+                <input type="text" name="filter_customer" value="{{ filter_customer }}" class="form-control" />
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-sm-6">
+                  <a href="{{ orderr }}" class="btn btn-warning btn-block"><i class="fa fa-eraser"></i> {{ button_clear }}</a>
+                </div>
+                <div class="col-sm-6">
+                  <button type="button" id="button-filter" class="btn btn-primary btn-block"><i class="fa fa-filter"></i> {{ button_filter }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% if orders %}
+        <form method="post" action="" enctype="multipart/form-data" id="form">
+          <div>
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <td style="width: 1px;" class="text-center"><input type="checkbox" name="onselected" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                  <td style="width: 1px;" class="text-center">#</td>
+                  <td class="text-left">{{ column_to }}</td>
+                  <td class="text-center">{{ column_total }}</td>
+                  <td class="text-center">{{ column_date }}</td>
+                  <td class="text-center">{{ column_order_status }}</td>
+                  <td class="text-center">{{ column_customer }}</td>
+                  <td class="text-center">{{ column_tariff }}</td>
+                  <td class="text-center">{{ column_dispatch }}</td>
+                  <td class="text-center">{{ column_status }}</td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in orders %}
+                <tr class="{{ order.color }}">
+                  <td class="text-center">
+                    {% if order.order_id in selected %}
+                    <input type="checkbox" name="selected[]" value="{{ order.order_id }}" checked="checked" />
+                    {% else %}
+                    <input type="checkbox" name="selected[]" value="{{ order.order_id }}" />
+                    {% endif %}
+                  </td>
+                  <td class="text-center">
+                    <a href="{{ order.order_view }}" target="_blank">{{ order.order_id }}</a>
+                  </td>
+                  <td class="text-left">{{ order.to }}</td>
+                  <td class="text-center">{{ order.total }}</td>
+                  <td class="text-center">{{ order.date_added }}</td>
+                  <td class="text-center">{{ order.order_status }}</td>
+                  <td class="text-center">
+                    <span id="ll_checkclient_{{ order.order_id }}" class="ll_checkclient_popover label label-{{ order.check_color }}" data-content="{{ order.check }}" style="cursor: pointer;">{{ order.customer }}</span>
+                  </td>
+                  <td class="text-center"><span class="label label-default">{{ order.tariff }}</span></td>
+                  <td class="text-center">{{ order.dispatch_number }}</td>
+                  <td class="text-center">
+                    <label class="control-label"><span data-toggle="tooltip" title="{{ order.description }}">{{ order.status }}</span></label>
+                    <br>
+                    <small class="form-text text-muted">{{ order.date }}</small>
+                  </td>
+                  <td class="text-center">
+                    {% if order.status_id >= 0 %}
+                    <div class="btn-group">
+                      {% if order.status_id %}
+                        <a href="{{ order.view }}" data-toggle="tooltip" title="{{ button_view }}" class="btn btn-default"><i class="fa fa-eye"></i></a>
+                        {% if order.status_id not in [0, 2] %}
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li><a href="{{ order.update }}"><span class="text-primary"><i class="fa fa-refresh fa-fw"></i> {{ button_update }}</span></a></li>
+                          <li><a href="{{ order.invoice }}" target="_blank"><span class="text-primary"><i class="fa fa-print fa-fw"></i> {{ button_invoice }}</span></a></li>
+                          <li><a href="{{ order.sticker }}" target="_blank"><span class="text-primary"><i class="fa fa-sticky-note-o fa-fw"></i> {{ button_sticker }}</span></a></li>
+                          {% if ll_invoice %}
+                            <li><a href="{{ order.torg }}" target="_blank"><span class="text-primary"><i class="fa fa-barcode fa-fw"></i> {{ button_torg }}</span></a></li>
+                          {% else %}
+                            <li class="disabled"><a><span class="text-primary"><i class="fa fa-barcode fa-fw"></i> {{ button_torg }}</span></a></li>
+                          {% endif %}
+                          <li><a href="{{ order.email }}"><span class="text-primary"><i class="fa fa-envelope-o fa-fw"></i> {{ button_email }}</span></a></li>
+                          <li><a href="{{ order.courier }}"><span class="text-primary"><i class="fa fa-calendar fa-fw"></i> {{ button_courier }}</span></a></li>
+                          <li class="hidden"><a href="{{ order.call }}"><span class="text-primary"><i class="fa fa-phone fa-fw"></i> {{ button_call }}</span></a></li>
+                          <li><a style="cursor: pointer;" onclick="confirm('{{ text_clean_confirm }}') ? location = '{{ order.remove }}' : false;"><span class="text-warning"><i class="fa fa-eraser fa-fw"></i> {{ button_delete }}</span></a></li>
+                          <li><a style="cursor: pointer;" onclick="confirm('{{ text_remove_confirm }}') ? location = '{{ order.remove_db }}' : false;"><span class="text-danger"><i class="fa fa-times fa-fw"></i> {{ button_delete_db }}</span></a></li>
+                        </ul>
+                        {% endif %}
+                      {% else %}
+                        <a onclick="$('input[value={{ order.order_id }}]').prop('checked', true); $('#form').attr('action', '{{ send }}'); $('#form').submit();" data-toggle="tooltip" title="{{ button_create }}" class="btn btn-success"><i class="fa fa-plus"></i></a>
+                        <a style="cursor: pointer;" onclick="confirm('{{ text_clean_confirm }}') ? location = '{{ order.remove }}' : false;" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-warning"><i class="fa fa-eraser"></i></a>
+                        <a style="cursor: pointer;" onclick="confirm('{{ text_remove_confirm }}') ? location = '{{ order.remove_db }}' : false;" data-toggle="tooltip" title="{{ button_delete_db }}" class="btn btn-danger"><i class="fa fa-times"></i></a>
+                      {% endif %}
+                    </div>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-sm-6 text-left">{{ pagination }}</div>
+          <div class="col-sm-6 text-right">{{ results }}</div>
+        </div>
+        {% else %}
+        <div class="row">
+          <div class="col-sm-12 text-center">{{ text_no_results }}</div>
+        </div>
+        {% endif %}
+      </div>
+      <div class="panel-footer">
+        <img src="../image/catalog/{{ m }}/logo.png" class="pull-right">
+        <span class="label label-default">{{ m }}</span>
+        <span class="label label-default">{{ version }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+<link href="view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" media="screen" />
+<script>
+$('.date').datetimepicker({
+  pickTime: false,
+  format: 'YYYY-MM-DD'
+});
+
+$('input[name*=\'selected\'], input[name*=\'onselected\']').on('change', function() {
+  $('#button-send, #button-update, #button-invoice, #button-sticker').addClass('disabled');
+
+  var selected = $('input[name*=\'selected\']:checked');
+
+  if (selected.length) {
+    $('#button-send, #button-update, #button-invoice, #button-sticker').removeClass('disabled');
+  }
+});
+
+$('input[name=\'filter_order_id\'], input[name=\'filter_to\'], input[name=\'filter_pvz\'], input[name=\'filter_total\'], input[name=\'filter_number\'], input[name=\'filter_dispatch\'], input[name=\'filter_date_added\']').on('keydown', function(e) {
+  if (e.keyCode == 13) {
+    $('#button-filter').trigger('click');
+  }
+});
+
+$('#button-filter').on('click', function() {
+  url = '{{ orderr }}';
+
+  var filter_order_id = $('input[name=\'filter_order_id\']').val();
+
+  if (filter_order_id) {
+    url += '&filter_order_id=' + encodeURIComponent(filter_order_id);
+  }
+
+  var filter_to = $('input[name=\'filter_to\']').val();
+
+  if (filter_to) {
+    url += '&filter_to=' + encodeURIComponent(filter_to);
+  }
+
+  var filter_pvz = $('input[name=\'filter_pvz\']').val();
+
+  if (filter_pvz) {
+    url += '&filter_pvz=' + encodeURIComponent(filter_pvz);
+  }
+
+  var filter_total = $('input[name=\'filter_total\']').val();
+
+  if (filter_total) {
+    url += '&filter_total=' + encodeURIComponent(filter_total);
+  }
+
+  var filter_tariff = $('select[name=\'filter_tariff\']').val();
+
+  if (filter_tariff != '*') {
+    url += '&filter_tariff=' + encodeURIComponent(filter_tariff);
+  }
+
+  var filter_order_status = $('select[name=\'filter_order_status\']').val();
+
+  if (filter_order_status != '*') {
+    url += '&filter_order_status=' + encodeURIComponent(filter_order_status);
+  }
+
+  var filter_number = $('input[name=\'filter_number\']').val();
+
+  if (filter_number) {
+    url += '&filter_number=' + encodeURIComponent(filter_number);
+  }
+
+  var filter_dispatch = $('input[name=\'filter_dispatch\']').val();
+
+  if (filter_dispatch) {
+    url += '&filter_dispatch=' + encodeURIComponent(filter_dispatch);
+  }
+
+  var filter_cdek_status = $('select[name=\'filter_cdek_status\']').val();
+
+  if (filter_cdek_status != '*') {
+    url += '&filter_cdek_status=' + encodeURIComponent(filter_cdek_status);
+  }
+
+  var filter_date_added = $('input[name=\'filter_date_added\']').val();
+
+  if (filter_date_added) {
+    url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
+  }
+
+  var filter_customer = $('input[name=\'filter_customer\']').val();
+
+  if (filter_customer) {
+    url += '&filter_customer=' + encodeURIComponent(filter_customer);
+  }
+
+  location = url;
+});
+
+$('input[name=\'filter_customer\']').autocomplete({
+  'source': function(request, response) {
+    $.ajax({
+      url: '{{ customer_autocomplete }}&filter_name=' +  encodeURIComponent(request),
+      dataType: 'json',
+      success: function(json) {
+        response($.map(json, function(item) {
+          return {
+            label: item['name'],
+            value: item['customer_id']
+          }
+        }));
+      }
+    });
+  },
+  'select': function(item) {
+    $('input[name=\'filter_customer\']').val(item['label']);
+  }
+});
+
+$('input[name=\'filter_to_name\']').autocomplete({
+  'source': function(request, response) {
+    $.ajax({
+      url: '{{ to_autocomplete }}&filter_name=' +  encodeURIComponent(request),
+      dataType: 'json',
+      success: function(json) {
+        response($.map(json, function(item) {
+          return {
+            label: item['full'],
+            value: item['id']
+          }
+        }));
+      }
+    });
+  },
+  'select': function(item) {
+    $('input[name=\'filter_to\']').val(item['value']);
+    $('input[name=\'filter_to_name\']').val(item['label']);
+  }
+});
+
+$('.ll_checkclient_popover').popover({
+  animation: 'false',
+  placement: 'left auto',
+  html: 'true',
+  trigger: 'hover click'
+});
+
+function checkPhone(id, phone, customer_id) {
+  $.ajax({
+    url: '{{ check_phone_url }}&phone=' + encodeURIComponent(phone) + '&customer_id=' + encodeURIComponent(customer_id),
+    dataType: 'json',
+    success: function(json) {
+      if (json['success']) {
+        $('#ll_checkclient_' + id).removeAttr('data-content');
+        $('#ll_checkclient_' + id).data('bs.popover').options.content = json['success'];
+        $('#ll_checkclient_' + id).popover('show');
+      }
+
+      if (json['error']) {
+        $('#ll_checkclient_' + id).removeAttr('data-content');
+        $('#ll_checkclient_' + id).data('bs.popover').options.content = json['error'];
+        $('#ll_checkclient_' + id).popover('show');
+      }
+
+      if (json['color']) {
+        $('#ll_checkclient_' + id).removeClass('label-default label-success label-warning label-danger');
+        $('#ll_checkclient_' + id).addClass('label-' + json['color']);
+      }
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+    }
+  });
+}
+</script>
+{{ footer }} 

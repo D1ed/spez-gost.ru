@@ -1,0 +1,8 @@
+.fish_prod_descr .price-new {
+	font-weight: 600;
+	color: #f56b6b;
+}
+.fish_prod_descr .price-old {
+	text-decoration: line-through;
+	margin-left: 10px;
+}

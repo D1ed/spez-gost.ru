@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>umm_analitics_services</id>
+	<name>UMM Analytics Services</name>
+	<code>umm_analitics_services</code>
+	<version>3.7.6</version>.
+	<author>invays</author>
+    <link>https://opencartmodul.ru</link>
+
+    <file path="catalog/controller/common/footer.php" error="log">
+        <operation error="log">
+            <search ><![CDATA[ return $this->load->view('common/footer', $data); ]]></search>
+			<add position="before"><![CDATA[ 
+            $data['yandex_metrika']     = html_entity_decode($this->config->get('yamarket_fusion_metrika'), ENT_QUOTES, 'UTF-8');
+            $data['google_analytics']     = html_entity_decode($this->config->get('yamarket_fusion_analytics'), ENT_QUOTES, 'UTF-8');
+            ]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/*/template/common/footer.tpl" error="log">
+        <operation error="log">
+            <search ><![CDATA[ </body> ]]></search>
+			<add position="before"><![CDATA[ 
+            <?=$yandex_metrika;?>
+            ]]></add>
+        </operation>
+    </file>
+    <file path="catalog/controller/common/header.php" error="log">
+        <operation error="log">
+            <search ><![CDATA[ return $this->load->view('common/header', $data); ]]></search>
+			<add position="before"><![CDATA[
+            $data['google_analytics']     = html_entity_decode($this->config->get('yamarket_fusion_analytics'), ENT_QUOTES, 'UTF-8');
+            ]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/*/template/common/header.tpl" error="log">
+        <operation error="log">
+            <search ><![CDATA[<head>]]></search>
+			<add position="after"><![CDATA[ 
+            <?=$google_analytics;?>
+            ]]></add>
+        </operation>
+    </file>
+
+</modification>

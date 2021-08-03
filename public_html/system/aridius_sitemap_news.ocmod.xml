@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+  <name>sitemap_aridius_news</name>
+  <code>sitemap_aridius_news</code>
+  <version>v_1</version>
+  <author>mrz(aridius)</author>
+<file path="catalog/controller/information/sitemap.php">
+<operation>
+      <search><![CDATA[
+					$this->load->language('information/sitemap');
+      ]]></search>
+      <add position="before"><![CDATA[
+				    $this->load->language('extension/module/aurus');
+      ]]></add>
+</operation>
+<operation>
+      <search><![CDATA[
+					$data['text_information'] = $this->language->get('text_information');
+      ]]></search>
+      <add position="before"><![CDATA[
+				    $data['text_news'] = $this->language->get('text_news');
+      ]]></add>
+</operation>
+
+<operation>
+      <search><![CDATA[
+					$data['column_left'] = $this->load->controller('common/column_left');
+      ]]></search>
+      <add position="before"><![CDATA[
+				    $this->load->model('catalog/aridiusnews');
+					$data['aridius_news_data'] = array();
+		            $aridius_news_data = $this->model_catalog_aridiusnews->getaridius_news($data);
+						foreach ($aridius_news_data as $result) {
+					    $data['aridius_news_data'][] = array(
+						'title'				=> $result['title'],
+						'href'				=> $this->url->link('information/aridius_news', 'aridius_news_id=' . $result['aridius_news_id'])
+					      );
+				        }
+      ]]></add>
+</operation>
+</file> 
+<file path="catalog/view/theme/aurus/template/information/sitemap.tpl">
+<operation>
+      <search index="6"><![CDATA[
+					</ul>
+      ]]></search>
+      <add position="before"><![CDATA[
+	  <?php if ($aridius_news_data) { ?>
+			<li><?php echo $text_news; ?>
+              <ul>
+                <?php foreach ($aridius_news_data as $aridius_news_datas) { ?>
+                <li><a href="<?php echo $aridius_news_datas['href']; ?>"><?php echo $aridius_news_datas['title']; ?></a></li>
+                <?php } ?>
+              </ul>
+            </li>
+	  <?php } ?>
+      ]]></add>
+</operation>
+</file> 
+</modification>

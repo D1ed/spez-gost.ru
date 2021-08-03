@@ -1,0 +1,945 @@
+{#
+/**
+ * @author    p0v1n0m <support@lutylab.ru>
+ * @license   Commercial
+ * @link      https://lutylab.ru
+ */
+#}
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="button" onclick="$('#form').submit()" class="btn btn-success"><i class="fa fa-play"></i> {{ button_export }}</button>
+        <a href="{{ shipping }}" data-toggle="tooltip" title="{{ button_shipping }}" class="btn btn-default"><i class="fa fa-truck"></i></a>
+        <a href="{{ exchange }}" data-toggle="tooltip" title="{{ button_exchange }}" class="btn btn-default"><i class="fa fa-exchange"></i></a>
+        <a href="{{ order }}" data-toggle="tooltip" title="{{ button_order }}" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
+      <h1>{{ heading_title_send }} <span class="label label-default">№ {{ number }}</span></h1>
+      <ol class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+          <div class="row">
+            <div class="col-sm-1">
+              <ul class="nav nav-pills nav-stacked" id="orders">
+                {% set row = 0 %}
+                {% for order in orders %}
+                <li><a href="#tab-order-{{ row }}" data-toggle="tab">{{ order.id }}</a></li>
+                {% set row = row + 1 %}
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="col-sm-11">
+              <div class="tab-content">
+                {% set row = 0 %}
+                {% for order in orders %}
+                  <div class="tab-pane" id="tab-order-{{ row }}">
+                    <input type="hidden" name="DeliveryRequest[Account]" value="{{ order.Account }}" />
+                    <input type="hidden" name="DeliveryRequest[Secure]" value="{{ order.Secure }}" />
+                    <input type="hidden" name="DeliveryRequest[Number]" value="{{ order.Number }}" />
+                    <input type="hidden" name="DeliveryRequest[Date]" value="{{ order.Date }}" />
+                    <input type="hidden" name="DeliveryRequest[OrderCount]" value="{{ orders|length }}" />
+                    <input type="hidden" name="DeliveryRequest[Order][{{ row }}][SendCityCode]" value="{{ order.Order.SendCityCode }}" />
+                    <input type="hidden" name="DeliveryRequest[Order][{{ row }}][RecCityCode]" value="{{ order.Order.RecCityCode }}" />
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a href="#tab-general-{{ row }}" data-toggle="tab">Общее</a></li>
+                      <li><a href="#tab-sender-{{ row }}" data-toggle="tab">Отправитель</a></li>
+                      <li><a href="#tab-recipient-{{ row }}" data-toggle="tab">Получатель</a></li>
+                      <li><a href="#tab-product-{{ row }}" data-toggle="tab">Товары</a></li>
+                      <li><a href="#tab-vat-{{ row }}" data-toggle="tab">Сборы</a></li>
+                      <li><a href="#tab-service-{{ row }}" data-toggle="tab">Услуги</a></li>
+                      <li><a href="#tab-shedule-{{ row }}" data-toggle="tab">Расписание доставки</a></li>
+                      <li><a href="#tab-call-{{ row }}" data-toggle="tab">Вызов курьера</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="tab-general-{{ row }}">
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Заказ</label>
+                          <div class="col-sm-10">
+                            <a href="{{ order.order_link }}" target="_blank" class="btn">{{ order.id }}</a>
+                          </div>
+                        </div>
+                        <div class="form-group required">
+                          <label class="col-sm-2 control-label">Номер заказа</label>
+                          <div class="col-sm-10">
+                            <input type="hidden" name="DeliveryRequest[Order][{{ row }}][order_id]" value="{{ order.id }}" />
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Number]" value="{{ order.Order.Number }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group required">
+                          <label class="col-sm-2 control-label">Тариф</label>
+                          <div class="col-sm-10">
+                            <div class="input-group">
+                              <select name="DeliveryRequest[Order][{{ row }}][TariffTypeCode]" class="form-control" readonly>
+                                {% for variant in variants %}
+                                  {% if order.Order.TariffTypeCode == variant.code %}
+                                  <option value="{{ variant.code }}" selected="selected">{{ variant.name }}</option>
+                                  {% endif %}
+                                {% endfor %}
+                              </select>
+                              <span class="input-group-btn">
+                                <a href="{{ order.edit }}" class="btn btn-primary" target="_blank"><i class="fa fa-pencil"></i> {{ button_edit }}</a>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Международный заказ</label>
+                          <div class="col-sm-10">
+                            <select id="international" class="form-control">
+                              <option value="0">Нет</option>
+                              <option value="1">Да</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Комментарий</label>
+                          <div class="col-sm-10">
+                            <textarea name="DeliveryRequest[Order][{{ row }}][Comment]" class="form-control">{{ order.Order.Comment }}</textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="tab-sender-{{ row }}">
+                        <div class="form-group required">
+                          <label class="col-sm-2 control-label">Город</label>
+                          <div class="col-sm-10">
+                            <input type="text" value="{{ order.from }}" class="form-control" readonly />
+                          </div>
+                        </div>
+                        <div class="form-group required">
+                          <label class="col-sm-2 control-label">Индекс</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][SendCityPostCode]" value="{{ order.Order.SendCityPostCode }}" class="form-control" />
+                          </div>
+                        </div>
+                        <legend class="hidden international">Данные для международного заказа</legend>
+                        <div class="form-group required hidden international">
+                          <label class="col-sm-2 control-label">Дата инвойса</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][DateInvoice]" value="{{ order.Order.DateInvoice }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group required hidden international">
+                          <label class="col-sm-2 control-label">Грузоотправитель</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][ShipperName]" value="{{ order.Order.ShipperName }}" class="form-control" />
+                            <small class="form-text text-muted">Используется при печати накладной.</small>
+                          </div>
+                        </div>
+                        <div class="form-group required hidden international">
+                          <label class="col-sm-2 control-label">Адрес грузоотправителя</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][ShipperAddress]" value="{{ order.Order.ShipperAddress }}" class="form-control" />
+                            <small class="form-text text-muted">Используется при печати накладной.</small>
+                          </div>
+                        </div>
+                        <legend>Реквизиты истинного продавца</legend>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Адрес</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Seller][Address]" value="{{ order.Order.Seller.Address }}" class="form-control" />
+                            <small class="form-text text-muted">Используется при печати инвойсов для отображения адреса настоящего продавца товара, либо торгового названия. Обязательно для международных заказов.</small>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Наименование</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Seller][Name]" value="{{ order.Order.Seller.Name }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">ИНН</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Seller][INN]" value="{{ order.Order.Seller.INN }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Телефон</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Seller][Phone]" value="{{ order.Order.Seller.Phone }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Форма собственности</label>
+                          <div class="col-sm-10">
+                            <select name="DeliveryRequest[Order][{{ row }}][Seller][OwnershipForm]" class="form-control">
+                              <option value=""></option>
+                              {% for id, title in ownership_forms %}
+                              <option value="{{ id }}" {% if id == order.Order.Seller.OwnershipForm %}selected="selected"{% endif %}>{{ title }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+                        <legend>Если отправитель не клиент СДЭК</legend>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Наименование компании</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Sender][Company]" value="{{ order.Order.Sender.Company }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Контактное лицо</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Sender][Name]" value="{{ order.Order.Sender.Name }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Улица</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Sender][Address][Street]" value="{{ order.Order.Sender.Address.Street }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Дом</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Sender][Address][House]" value="{{ order.Order.Sender.Address.House }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Квартира/офис</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Sender][Address][Flat]" value="{{ order.Order.Sender.Address.Flat }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Телефон</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Sender][Phone]" value="{{ order.Order.Sender.Phone }}" class="form-control" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="tab-recipient-{{ row }}">
+                        <div class="form-group required">
+                          <label class="col-sm-2 control-label">Город</label>
+                          <div class="col-sm-10">
+                            <input type="text" value="{{ order.to }}" class="form-control" readonly />
+                          </div>
+                        </div>
+                        <div class="form-group required">
+                          <label class="col-sm-2 control-label">Индекс</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][RecCityPostCode]" value="{{ order.Order.RecCityPostCode }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group required">
+                          <label class="col-sm-2 control-label">ФИО</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][RecipientName]" value="{{ order.Order.RecipientName }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Email</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][RecipientEmail]" value="{{ order.Order.RecipientEmail }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group required">
+                          <label class="col-sm-2 control-label">Телефон</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Phone]" value="{{ order.Order.Phone }}" class="form-control" />
+                          </div>
+                        </div>
+                        {% if order.Order.Address.PvzCode %}
+                        <div class="form-group required">
+                          <label class="col-sm-2 control-label">ПВЗ/постамат</label>
+                          <div class="col-sm-10">
+                            <select name="DeliveryRequest[Order][{{ row }}][Address][PvzCode]" class="form-control">
+                              {% if order.pvzs and order.pvzs is not empty %}
+                              {% for pvz in order.pvzs %}
+                              <option value="{{ pvz.code }}" {% if pvz.code == order.Order.Address.PvzCode %}selected="selected"{% endif %}>{{ pvz.type }} - {{ pvz.code }} - {{ pvz.fullAddress }}</option>
+                              {% endfor %}
+                              {% endif %}
+                            </select>
+                          </div>
+                        </div>
+                        {% else %}
+                        <div class="form-group required">
+                          <label class="col-sm-2 control-label">Улица</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Address][Street]" value="{{ order.Order.Address.Street }}" class="form-control" />
+                            <small class="form-text text-muted">Адрес, указанный при оформлении заказа: {{ order.address }}</small>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Дом</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Address][House]" value="{{ order.Order.Address.House }} " class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Квартира</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Address][Flat]" value="{{ order.Order.Address.Flat }} " class="form-control" />
+                          </div>
+                        </div>
+                        {% endif %}
+                        <legend class="hidden international">Данные для международного заказа</legend>
+                        <div class="form-group hidden international">
+                          <label class="col-sm-2 control-label">ИНН</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][RecipientINN]" value="{{ order.Order.RecipientINN }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group hidden international">
+                          <label class="col-sm-2 control-label">Серия паспорта</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Passport][Series]" value="{{ order.Order.Passport.Series }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group hidden international">
+                          <label class="col-sm-2 control-label">Номер паспорта</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Passport][Number]" value="{{ order.Order.Passport.Number }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group hidden international">
+                          <label class="col-sm-2 control-label">Дата выдачи паспорта</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Passport][IssueDate]" value="{{ order.Order.Passport.IssueDate }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group hidden international">
+                          <label class="col-sm-2 control-label">Кем выдан паспорт</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Passport][IssuedBy]" value="{{ order.Order.Passport.IssuedBy }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group hidden international">
+                          <label class="col-sm-2 control-label">Дата рождения</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Passport][DateBirth]" value="{{ order.Order.Passport.DateBirth }}" class="form-control" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="tab-product-{{ row }}">
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Номер упаковки</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Number]" value="{{ order.Order.Package.Number }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group required">
+                          <label class="col-sm-2 control-label">BarCode</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][BarCode]" value="{{ order.Order.Package.BarCode }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="form-group required">
+                          <label class="col-sm-2 control-label">Общий вес с упаковкой</label>
+                          <div class="col-sm-10">
+                            <div class="input-group">
+                              <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Weight]" value="{{ order.Order.Package.Weight }}" class="form-control" />
+                              <div class="input-group-addon">г</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Упаковка</label>
+                          <div class="col-sm-10">
+                            <select id="package" class="form-control">
+                              <option value="0">Нет</option>
+                              <option value="1" {% if order.pack %}selected="selected"{% endif %}>Да</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group required {% if order.pack == 0 %}hidden{% endif %} package">
+                          <label class="col-sm-2 control-label">Габариты упаковки</label>
+                          <div class="col-sm-10">
+                            <div class="row">
+                              <div class="col-sm-4">
+                                <div class="input-group">
+                                  <div class="input-group-addon">Длина</div>
+                                  <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][SizeA]" value="{{ order.Order.Package.SizeA }}" class="form-control" {% if order.pack == 0 %}disabled="disabled"{% endif %} />
+                                  <div class="input-group-addon">см</div>
+                                </div>
+                              </div>
+                              <div class="col-sm-4">
+                                <div class="input-group">
+                                  <div class="input-group-addon">Ширина</div>
+                                  <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][SizeB]" value="{{ order.Order.Package.SizeB }}" class="form-control" {% if order.pack == 0 %}disabled="disabled"{% endif %} />
+                                  <div class="input-group-addon">см</div>
+                                </div>
+                              </div>
+                              <div class="col-sm-4">
+                                <div class="input-group">
+                                  <div class="input-group-addon">Высота</div>
+                                  <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][SizeC]" value="{{ order.Order.Package.SizeC }}" class="form-control" {% if order.pack == 0 %}disabled="disabled"{% endif %} />
+                                  <div class="input-group-addon">см</div>
+                                </div>
+                              </div>
+                            </div>
+                            <small class="form-text text-muted">Каждый габарит в пределах от 1см до 1500см.</small>
+                          </div>
+                        </div>
+                        <table class="table table-bordered table-hover table-condensed">
+                          <thead>
+                            <tr>
+                              <td colspan="3">
+                                <button type="button" onclick="mergeProducts({{ row }});" class="btn btn-success btn-block btn-sm"><i class="fa fa-compress"></i> Объединить товары</button>
+                              </td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% set product_row = 0 %}
+                            {% for product in order.products %}
+                            <tr>
+                              <td rowspan="14" class="col-xs-2"><a href="{{ product.edit }}" target="_blank">{{ product.Comment }}</a></td>
+                            </tr>
+                            <tr>
+                              <td class="col-xs-2">Наименование</td>
+                              <td>
+                                <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][{{ product_row }}][Comment]" value="{{ product.Comment }}" class="form-control input-sm" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Наименование на английском</td>
+                              <td>
+                                <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][{{ product_row }}][CommentEx]" value="{{ product.CommentEx }}" class="form-control input-sm" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Артикул</td>
+                              <td>
+                                <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][{{ product_row }}][WareKey]" value="{{ product.WareKey }}" class="form-control input-sm" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Ссылка</td>
+                              <td>
+                                <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][{{ product_row }}][Link]" value="{{ product.Link }}" class="form-control input-sm" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Вес за единицу товара</td>
+                              <td>
+                                <div class="input-group input-group-sm">
+                                  <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][{{ product_row }}][Weight]" value="{{ product.Weight }}" class="form-control input-sm" />
+                                  <div class="input-group-addon">г</div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Вес брутто за единицу товара</td>
+                              <td>
+                                <div class="input-group input-group-sm">
+                                  <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][{{ product_row }}][WeightBrutto]" value="{{ product.WeightBrutto }}" class="form-control input-sm" />
+                                  <div class="input-group-addon">г</div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Ставка НДС</td>
+                              <td>
+                                <select name="DeliveryRequest[Order][{{ row }}][Package][Item][{{ product_row }}][PaymentVATRate]" class="form-control input-sm" {% if product.Payment == 0 %}disabled{% endif %}>
+                                  {% for id, title in vats %}
+                                  <option value="{{ id }}" {% if product.PaymentVATRate is same as(id) %}selected="selected"{% endif %}>{{ title }}</option>
+                                  {% endfor %}
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Сумма НДС</td>
+                              <td>
+                                <div class="input-group input-group-sm">
+                                  <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][{{ product_row }}][PaymentVATSum]" value="{{ product.PaymentVATSum }}" class="form-control input-sm" {% if product.Payment == 0 %}disabled{% endif %} />
+                                  <div class="input-group-addon">{{ order.payment_currency }}</div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Маркировка (если она указана, то количество не может быть больше 1)</td>
+                              <td>
+                                <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][{{ product_row }}][Marking]" value="{{ product.Marking }}" class="form-control input-sm" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Количество</td>
+                              <td>
+                                <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][{{ product_row }}][Amount]" value="{{ product.Amount }}" class="form-control input-sm" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Цена для страховки</td>
+                              <td>
+                                <div class="input-group input-group-sm">
+                                  <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][{{ product_row }}][Cost]" value="{{ product.Cost }}" class="form-control input-sm" />
+                                  <div class="input-group-addon">{{ order.cost_currency }}</div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>К оплате за единицу</td>
+                              <td>
+                                <div class="input-group input-group-sm">
+                                  <input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][{{ product_row }}][Payment]" value="{{ product.Payment }}" class="form-control input-sm" />
+                                  <div class="input-group-addon">{{ order.payment_currency }}</div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>К оплате за товар</td>
+                              <td class="success"><strong>{{ product.total }}</strong> {{ order.payment_currency }}</td>
+                            </tr>
+                              {% set product_row = product_row + 1 %}
+                            {% endfor %}
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <td class="text-right">Стоимость доставки</td>
+                              <td colspan="2" class="success"><strong>{{ order.Order.DeliveryRecipientCost }}</strong> {{ order.payment_currency }} (редактируется на вкладке Сборы)</td>
+                            </tr>
+                            <tr>
+                              <td class="text-right">Итого к оплате клиентом</td>
+                              <td colspan="2" class="success"><strong>{{ order.total }}</strong> {{ order.payment_currency }} (если вы вручную изменили стоимость товаров или доставки, то данная величина динамически не пересчитывается, но в СДЭК будет передана новая)</td>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                      <div class="tab-pane" id="tab-vat-{{ row }}">
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Доп. сбор за доставку</label>
+                          <div class="col-sm-10">
+                            <select id="vat" class="form-control">
+                              <option value="0">Нет</option>
+                              <option value="1" selected="selected">Не зависящий от стоимости заказа</option>
+                              <option value="2">Зависящий от стоимости заказа</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group vat1">
+                          <label class="col-sm-2 control-label">Сумма сбора</label>
+                          <div class="col-sm-10">
+                            <div class="input-group">
+                              <input type="text" name="DeliveryRequest[Order][{{ row }}][DeliveryRecipientCost]" value="{{ order.Order.DeliveryRecipientCost }}" class="form-control" />
+                              <div class="input-group-addon">{{ order.payment_currency }}</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group vat1">
+                          <label class="col-sm-2 control-label">Ставка НДС</label>
+                          <div class="col-sm-10">
+                            <select name="DeliveryRequest[Order][{{ row }}][DeliveryRecipientVATRate]" class="form-control">
+                              <option value=""></option>
+                              {% for id, title in vats %}
+                              <option value="{{ id }}" {% if order.Order.DeliveryRecipientVATRate is same as(id) %}selected="selected"{% endif %}>{{ title }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group vat1">
+                          <label class="col-sm-2 control-label">Сумма НДС</label>
+                          <div class="col-sm-10">
+                            <div class="input-group">
+                              <input type="text" name="DeliveryRequest[Order][{{ row }}][DeliveryRecipientVATSum]" value="{{ order.Order.DeliveryRecipientVATSum }}" class="form-control" />
+                              <div class="input-group-addon">{{ order.payment_currency }}</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group required hidden vat2">
+                          <label class="col-sm-2 control-label">Порог стоимости товара</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[Order][{{ row }}][DeliveryRecipientCostAdv][Threshold]" value="{{ order.Order.DeliveryRecipientCostAdv.Threshold }}" class="form-control" />
+                            <small class="form-text text-muted">Действует по условию меньше или равно, в целых единицах валюты.</small>
+                          </div>
+                        </div>
+                        <div class="form-group required hidden vat2">
+                          <label class="col-sm-2 control-label">Сумма сбора</label>
+                          <div class="col-sm-10">
+                            <div class="input-group">
+                              <input type="text" name="DeliveryRequest[Order][{{ row }}][DeliveryRecipientCostAdv][Sum]" value="{{ order.Order.DeliveryRecipientCostAdv.Sum }}" class="form-control" />
+                              <div class="input-group-addon">{{ order.payment_currency }}</div>
+                            </div>
+                            <small class="form-text text-muted">Доп. сбор за доставку товаров, общая стоимость которых попадает в интервал.</small>
+                          </div>
+                        </div>
+                        <div class="form-group hidden vat2">
+                          <label class="col-sm-2 control-label">Ставка НДС</label>
+                          <div class="col-sm-10">
+                            <select name="DeliveryRequest[Order][{{ row }}][DeliveryRecipientCostAdv][VATRate]" class="form-control">
+                              <option value=""></option>
+                              {% for id, title in vats %}
+                              <option value="{{ id }}" {% if order.Order.DeliveryRecipientCostAdv.VATRate is same as(id) %}selected="selected"{% endif %}>{{ title }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group hidden vat2">
+                          <label class="col-sm-2 control-label">Сумма НДС</label>
+                          <div class="col-sm-10">
+                            <div class="input-group">
+                              <input type="text" name="DeliveryRequest[Order][{{ row }}][DeliveryRecipientCostAdv][VATSum]" value="{{ order.Order.DeliveryRecipientCostAdv.VATSum }}" class="form-control" />
+                              <div class="input-group-addon">{{ order.payment_currency }}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="tab-service-{{ row }}">
+                        <div class="form-group">
+                          <div class="col-sm-12">
+                            <div class="well well-sm" style="height: 150px; overflow: auto; margin: 0;">
+                              {% set service_row = 0 %}
+                              {% for service in services %}
+                              <div class="checkbox">
+                                <label>
+                                  <input type="checkbox" name="DeliveryRequest[Order][{{ row }}][AddService][{{ service_row }}][ServiceCode]" value="{{ service.code }}" {% if service.code in order.Order.services %}checked="checked"{% endif %} />
+                                  {{ service.name }}
+                                  {% if service.code in order.Order.services and service.code == 24 %}
+                                    <input type="hidden" name="DeliveryRequest[Order][{{ row }}][AddService][{{ service_row }}][Count]" value="{{ order.Order.service_count }}" />
+                                  {% endif %}
+                                </label>
+                              </div>
+                              {% set service_row = service_row + 1 %}
+                              {% endfor %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="tab-shedule-{{ row }}">
+                        <div class="form-group">
+                          <div class="col-sm-12">
+                            <table id="shedules" class="table table-striped table-bordered table-hover">
+                              <thead>
+                                <tr>
+                                  <td class="text-center" colspan="4">Временной интервал доставки</td>
+                                  <td class="text-center" colspan="4">Новый адрес доставки (если требуется изменить)</td>
+                                  <td rowspan="2"></td>
+                                </tr>
+                                <tr>
+                                  <td class="text-left required">Дата</td>
+                                  <td class="text-left required">Время начала</td>
+                                  <td class="text-left required">Время окончания</td>
+                                  <td class="text-left">Комментарий</td>
+                                  <td class="text-left">Улица</td>
+                                  <td class="text-left">Дом</td>
+                                  <td class="text-left">Квартира</td>
+                                  <td class="text-left">Код ПВЗ/постамата</td>
+                                </tr>
+                              </thead>
+                              <tbody></tbody>
+                              <tfoot>
+                                <tr>
+                                  <td colspan="9">
+                                    <button type="button" onclick="addSchedule('{{ row }}');" class="btn btn-success btn-block btn-sm"><i class="fa fa-plus-circle"></i> Добавить</button>
+                                  </td>
+                                </tr>
+                              </tfoot>
+                            </table>
+                            <small class="form-text text-muted">Заполняется ИМ самостоятельно, если это определено в договоре.<br>В один день возможен только один временной интервал не менее 3 часов.<br>На одну дату по одному заказу может быть только одно расписание.<br>Расписание может иметь несколько дней доставки.<br>Расписание может быть передано позже.</small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="tab-call-{{ row }}">
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Вызвать курьера</label>
+                          <div class="col-sm-10">
+                            <select id="call" class="form-control">
+                              <option value="0">Нет</option>
+                              <option value="1">Да</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group required hidden call">
+                          <label class="col-sm-2 control-label">Дата ожидания курьера</label>
+                          <div class="col-sm-10">
+                            <div class="input-group date">
+                              <input type="text" name="DeliveryRequest[CallCourier][{{ row }}][Call][Date]" value="{{ order.call.date }}" data-date-format="YYYY-MM-DD" class="form-control" disabled="disabled" />
+                              <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group required hidden call">
+                          <label class="col-sm-2 control-label">Время ожидания курьера</label>
+                          <div class="col-sm-10">
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <div class="input-group time">
+                                  <div class="input-group-addon">с</div>
+                                  <input type="text" name="DeliveryRequest[CallCourier][{{ row }}][Call][TimeBeg]" value="{{ order.call.time_beg }}" class="form-control" disabled="disabled" />
+                                  <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="input-group time">
+                                  <div class="input-group-addon">до</div>
+                                  <input type="text" name="DeliveryRequest[CallCourier][{{ row }}][Call][TimeEnd]" value="{{ order.call.time_end }}" class="form-control" disabled="disabled" />
+                                  <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group hidden call">
+                          <label class="col-sm-2 control-label">Время обеда</label>
+                          <div class="col-sm-10">
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <div class="input-group time">
+                                  <div class="input-group-addon">с</div>
+                                  <input type="text" name="DeliveryRequest[CallCourier][{{ row }}][Call][LunchBeg]" value="{{ order.call.lunch_beg }}" class="form-control" disabled="disabled" />
+                                  <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="input-group time">
+                                  <div class="input-group-addon">до</div>
+                                  <input type="text" name="DeliveryRequest[CallCourier][{{ row }}][Call][LunchEnd]" value="{{ order.call.lunch_end }}" class="form-control" disabled="disabled" />
+                                  <span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                                </div>
+                              </div>
+                            </div>
+                            <small class="form-text text-muted">Заполнять только если входит во временной диапазон времени ожидания курьера.</small>
+                          </div>
+                        </div>
+                        <div class="form-group required hidden call">
+                          <label class="col-sm-2 control-label">Город отправителя</label>
+                          <div class="col-sm-10">
+                            <input type="hidden" name="DeliveryRequest[CallCourier][{{ row }}][Call][SendCityCode]" value="{{ order.Order.SendCityCode }}" disabled="disabled" />
+                            <input type="text" value="{{ order.from }}" class="form-control" readonly />
+                          </div>
+                        </div>
+                        <div class="form-group required hidden call">
+                          <label class="col-sm-2 control-label">Улица отправителя</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[CallCourier][{{ row }}][Call][SendAddress][Street]" value="{{ order.call.street }}" class="form-control" maxlength="50" disabled="disabled" />
+                            <small class="form-text text-muted">На один адрес может быть не более одного вызова курьера в день. Не надо указывать префиксы значений, вроде «ул.».</small>
+                          </div>
+                        </div>
+                        <div class="form-group required hidden call">
+                          <label class="col-sm-2 control-label">Дом, корпус, строение отправителя</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[CallCourier][{{ row }}][Call][SendAddress][House]" value="{{ order.call.house }}" class="form-control" maxlength="30" disabled="disabled" />
+                            <small class="form-text text-muted">Не надо указывать префиксы значений, вроде «дом».</small>
+                          </div>
+                        </div>
+                        <div class="form-group required hidden call">
+                          <label class="col-sm-2 control-label">Квартира/офис отправителя</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[CallCourier][{{ row }}][Call][SendAddress][Flat]" value="{{ order.call.flat }}" class="form-control" maxlength="10" disabled="disabled" />
+                            <small class="form-text text-muted">Не надо указывать префиксы значений, вроде «кв.».</small>
+                          </div>
+                        </div>
+                        <div class="form-group hidden call">
+                          <label class="col-sm-2 control-label">ФИО отправителя</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[CallCourier][{{ row }}][Call][SenderName]" value="{{ order.call.sender_name }}" class="form-control" disabled="disabled" />
+                          </div>
+                        </div>
+                        <div class="form-group hidden call">
+                          <label class="col-sm-2 control-label">Телефон отправителя</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="DeliveryRequest[CallCourier][{{ row }}][Call][SendPhone]" value="{{ order.call.send_phone }}" class="form-control" disabled="disabled" />
+                          </div>
+                        </div>
+                        <div class="form-group hidden call">
+                          <label class="col-sm-2 control-label">Комментарий</label>
+                          <div class="col-sm-10">
+                            <textarea type="text" name="DeliveryRequest[CallCourier][{{ row }}][Call][Comment]" class="form-control" disabled="disabled">{{ order.call.comment }}</textarea>
+                            <small class="form-text text-muted">Описание груза.</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% set row = row + 1 %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="panel-footer">
+        <img src="../image/catalog/{{ m }}/logo.png" class="pull-right">
+        <span class="label label-default">{{ m }}</span>
+        <span class="label label-default">{{ version }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$('#orders a:first').tab('show');
+
+let html = [];
+
+{% set row = 0 %}
+{% for order in orders %}
+  $('#tab-order-{{ row }} #international').on('change', function() {
+    if (this.value > 0) {
+      $('#tab-order-{{ row }} .international').removeClass('hidden');
+    } else {
+      $('#tab-order-{{ row }} .international').addClass('hidden');
+    }
+  });
+
+  $('#tab-order-{{ row }} #package').on('change', function() {
+    if (this.value > 0) {
+      $('#tab-order-{{ row }} .package').removeClass('hidden');
+      $('#tab-order-{{ row }} .package input').prop('disabled', false);
+    } else {
+      $('#tab-order-{{ row }} .package').addClass('hidden');
+      $('#tab-order-{{ row }} .package input').prop('disabled', true);
+    }
+  });
+
+  $('#tab-order-{{ row }} #vat').on('change', function() {
+    $('#tab-order-{{ row }} .vat1,#tab-order-{{ row }} .vat2').addClass('hidden');
+
+    if (this.value > 0) {
+      $('#tab-order-{{ row }} .vat' + this.value).removeClass('hidden');
+    }
+  });
+
+  $('#tab-order-{{ row }} #call').on('change', function() {
+    if (this.value > 0) {
+      $('#tab-order-{{ row }} .call').removeClass('hidden');
+      $('#tab-order-{{ row }} .call input, #tab-order-{{ row }} .call textarea').prop('disabled', false);
+    } else {
+      $('#tab-order-{{ row }} .call').addClass('hidden');
+      $('#tab-order-{{ row }} .call input, #tab-order-{{ row }} .call textarea').prop('disabled', true);
+    }
+  });
+
+  $('#tab-order-{{ row }} .date').datetimepicker({
+    pickTime: false,
+    locale: 'ru',
+    format: 'HH:mm',
+  });
+
+  $('#tab-order-{{ row }} .time').datetimepicker({
+    pickDate: false,
+    locale: 'ru',
+    format: 'HH:mm',
+  });
+
+  html[{{ row }}]  = '<tr>';
+  html[{{ row }}] += '  <td rowspan="14" class="col-xs-2"><a href="{{ order.merge.edit }}" target="_blank">{{ order.merge.Comment }}</a></td>';
+  html[{{ row }}] += '</tr>';
+  html[{{ row }}] += '<tr>';
+  html[{{ row }}] += '  <td class="col-xs-2">Наименование</td>';
+  html[{{ row }}] += '  <td><input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][0][Comment]" value="{{ order.merge.Comment }}" class="form-control input-sm" /></td>';
+  html[{{ row }}] += '</tr>';
+  html[{{ row }}] += '<tr>';
+  html[{{ row }}] += '  <td>Наименование на английском</td>';
+  html[{{ row }}] += '  <td><input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][0][CommentEx]" value="{{ order.merge.CommentEx }}" class="form-control input-sm" /></td>';
+  html[{{ row }}] += '</tr>';
+  html[{{ row }}] += '<tr>';
+  html[{{ row }}] += '  <td>Артикул</td>';
+  html[{{ row }}] += '  <td><input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][0][WareKey]" value="{{ order.merge.WareKey }}" class="form-control input-sm" /></td>';
+  html[{{ row }}] += '</tr>';
+  html[{{ row }}] += '<tr>';
+  html[{{ row }}] += '  <td>Ссылка</td>';
+  html[{{ row }}] += '  <td><input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][0][Link]" value="{{ order.merge.Link }}" class="form-control input-sm" /></td>';
+  html[{{ row }}] += '</tr>';
+  html[{{ row }}] += '<tr>';
+  html[{{ row }}] += '  <td>Вес за единицу товара</td>';
+  html[{{ row }}] += '  <td><div class="input-group input-group-sm"><input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][0][Weight]" value="{{ order.merge.Weight }}" class="form-control input-sm" /><div class="input-group-addon">г</div></div></td>';
+  html[{{ row }}] += '</tr>';
+  html[{{ row }}] += '<tr>';
+  html[{{ row }}] += '  <td>Вес брутто за единицу товара</td>';
+  html[{{ row }}] += '  <td><div class="input-group input-group-sm"><input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][0][WeightBrutto]" value="{{ order.merge.WeightBrutto }}" class="form-control input-sm" /><div class="input-group-addon">г</div></div></td>';
+  html[{{ row }}] += '</tr>';
+  html[{{ row }}] += '<tr>';
+  html[{{ row }}] += '  <td>Ставка НДС</td>';
+  html[{{ row }}] += '  <td>';
+  html[{{ row }}] += '   <select name="DeliveryRequest[Order][{{ row }}][Package][Item][0][PaymentVATRate]" class="form-control input-sm" {% if 0 == order.merge.Payment %}disabled{% endif %}>';
+  {% for id, title in vats %}
+  html[{{ row }}] += '     <option value="{{ id }}" {% if order.merge.PaymentVATRate is same as(id) %}selected="selected"{% endif %}>{{ title }}</option>';
+  {% endfor %}
+  html[{{ row }}] += '   </select>';
+  html[{{ row }}] += '  </td>';
+  html[{{ row }}] += '</tr>';
+  html[{{ row }}] += '<tr>';
+  html[{{ row }}] += '  <td>Сумма НДС</td>';
+  html[{{ row }}] += '  <td><div class="input-group input-group-sm"><input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][0][PaymentVATSum]" value="{{ order.merge.PaymentVATSum }}" class="form-control input-sm" {% if 0 == order.merge.Payment %}disabled{% endif %} /><div class="input-group-addon">{{ order.payment_currency }}</div></div></td>';
+  html[{{ row }}] += '</tr>';
+  html[{{ row }}] += '<tr>';
+  html[{{ row }}] += '  <td>Маркировка (если она указана, то количество не может быть больше 1)</td>';
+  html[{{ row }}] += '  <td><input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][0][Marking]" value="{{ order.merge.Marking }}" class="form-control input-sm" /></td>';
+  html[{{ row }}] += '</tr>';
+  html[{{ row }}] += '<tr>';
+  html[{{ row }}] += '  <td>Количество</td>';
+  html[{{ row }}] += '  <td><input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][0][Amount]" value="{{ order.merge.Amount }}" class="form-control input-sm" /></td>';
+  html[{{ row }}] += '</tr>';
+  html[{{ row }}] += '<tr>';
+  html[{{ row }}] += '  <td>Цена для страховки</td>';
+  html[{{ row }}] += '  <td><div class="input-group input-group-sm"><input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][0][Cost]" value="{{ order.merge.Cost }}" class="form-control input-sm" /><div class="input-group-addon">{{ order.cost_currency }}</div></div></td>';
+  html[{{ row }}] += '</tr>';
+  html[{{ row }}] += '<tr>';
+  html[{{ row }}] += '  <td>К оплате за единицу</td>';
+  html[{{ row }}] += '  <td><div class="input-group input-group-sm"><input type="text" name="DeliveryRequest[Order][{{ row }}][Package][Item][0][Payment]" value="{{ order.merge.Payment }}" class="form-control input-sm" /><div class="input-group-addon">{{ order.payment_currency }}</div></div></td>';
+  html[{{ row }}] += '</tr>';
+  html[{{ row }}] += '<tr>';
+  html[{{ row }}] += '  <td>К оплате за товар</td>';
+  html[{{ row }}] += '  <td class="success"><strong>{{ order.merge.total }}</strong> {{ order.payment_currency }}</td>';
+  html[{{ row }}] += '</tr>';
+
+{% set row = row + 1 %}
+{% endfor %}
+
+function mergeProducts(row) {
+  $('#tab-product-' + row + ' table tbody').html(html[row]);
+}
+
+var schedule_row = 0;
+
+function addSchedule(row) {
+  html  = '<tr class="schedule-row-' + schedule_row + '">';
+  html += '  <td class="text-left">';
+  html += '    <div class="input-group date"><input type="text" name="DeliveryRequest[Order][' + row + '][Schedule][Attempt][' + schedule_row + '][Date]" data-date-format="YYYY-MM-DD" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div>';
+  html += '  </td>';
+  html += '  <td class="text-left">';
+  html += '    <div class="input-group time"><input type="text" name="DeliveryRequest[Order][' + row + '][Schedule][Attempt][' + schedule_row + '][TimeBeg]" data-date-format="HH:mm" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div>';
+  html += '  </td>';
+  html += '  <td class="text-left">';
+  html += '    <div class="input-group time"><input type="text" name="DeliveryRequest[Order][' + row + '][Schedule][Attempt][' + schedule_row + '][TimeEnd]" data-date-format="HH:mm" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div>';
+  html += '  </td>';
+  html += '  <td class="text-left">';
+  html += '    <input type="text" name="DeliveryRequest[Order][' + row + '][Schedule][Attempt][' + schedule_row + '][Comment]" class="form-control" />';
+  html += '  </td>';
+  html += '  <td class="text-left">';
+  html += '    <input type="text" name="DeliveryRequest[Order][' + row + '][Schedule][Attempt][' + schedule_row + '][Address][Street]" class="form-control" {% if order.Order.Address.PvzCode %}disabled{% endif %} />';
+  html += '  </td>';
+  html += '  <td class="text-left">';
+  html += '    <input type="text" name="DeliveryRequest[Order][' + row + '][Schedule][Attempt][' + schedule_row + '][Address][House]" class="form-control" {% if order.Order.Address.PvzCode %}disabled{% endif %} />';
+  html += '  </td>';
+  html += '  <td class="text-left">';
+  html += '    <input type="text" name="DeliveryRequest[Order][' + row + '][Schedule][Attempt][' + schedule_row + '][Address][Flat]" class="form-control" {% if order.Order.Address.PvzCode %}disabled{% endif %} />';
+  html += '  </td>';
+  html += '  <td class="text-left">';
+  html += '    <input type="text" name="DeliveryRequest[Order][' + row + '][Schedule][Attempt][' + schedule_row + '][Address][PvzCode]" class="form-control" {% if order.Order.Address.PvzCode == false %}disabled{% endif %} />';
+  html += '  </td>';
+  html += '  <td class="text-right"><button type="button" onclick="$(\'#tab-order-' + row + ' .schedule-row-' + schedule_row  + '\').remove();" data-toggle="tooltip" title="Удалить" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+  html += '</tr>';
+
+  $('#tab-order-' + row + ' #shedules tbody').append(html);
+
+  $('#tab-order-' + row + ' .date').datetimepicker({
+    pickTime: false,
+  });
+
+  $('#tab-order-' + row + ' .time').datetimepicker({
+    pickDate: false,
+  });
+
+  schedule_row++;
+}
+</script>
+{{ footer }}

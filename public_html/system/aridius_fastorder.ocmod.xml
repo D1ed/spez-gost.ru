@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+  <name>fast_order</name>
+  <code>fast_order</code>
+  <version>v_1</version>
+  <author>mrz</author>
+  <file path="admin/controller/common/header.php">
+		<operation>
+			<search><![CDATA[
+			$data['logout'] = $this->url->link('common/logout', 'token=' . $this->session->data['token'], true);
+			]]></search>
+			<add position="after">
+			<![CDATA[
+			$qry = $this->db->query("SHOW TABLES LIKE '" . DB_PREFIX . "aridiusfastorder'");
+		    if ($qry->num_rows) {
+			$data['fastorder_status'] = $this->url->link('catalog/aridiusfastorder', 'token=' . $this->session->data['token'], true);
+            $this->load->model('catalog/aridiusfastorder');		
+	        $fastorder_total = $this->model_catalog_aridiusfastorder->getTotalOrder();
+			$data['fastorder_total'] = $fastorder_total;
+            } else {
+			$data['fastorder_status'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true);
+			}
+			if (empty($data['fastorder_total'])) {
+            $data['fastorder_total'] = 0;
+            }  
+			]]></add>
+		</operation>
+ 		<operation>
+			<search><![CDATA[
+			$data['heading_title'] = $this->language->get('heading_title');
+			]]></search>
+			<add position="after">
+			<![CDATA[
+			$data['fastorder_name'] = $this->language->get('fastorder_name');
+			]]></add>
+		</operation>
+  </file>
+  <file path="admin/view/template/common/header.tpl">
+		<operation>
+			<search><![CDATA[
+			<ul class="nav pull-right">
+			]]></search>
+			<add position="after"><![CDATA[
+			<li><a href="<?php echo $fastorder_status; ?>" data-toggle="tooltip" data-placement="bottom" title="<?php echo $fastorder_name; ?>"><span class="label label-danger pull-left"><?php echo $fastorder_total; ?></span> <i class="fa fa-shopping-cart fa-lg"></i></a></li> 
+			]]></add>
+		</operation>
+  </file>
+  <file path="catalog/controller/product/product.php">
+		<operation>
+			<search><![CDATA[
+			if ($product_info) {
+			]]></search>
+			<add position="after">
+			<![CDATA[
+            $data['aridiusfastorder'] = $this->load->controller('module/aridiusfastorder');
+			]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[
+			$data['button_cart'] = $this->language->get('button_cart');
+			]]></search>
+			<add position="after">
+			<![CDATA[
+		   $this->language->load('extension/module/aridiusfastorder');
+           $data['button_titlef'] = $this->language->get('button_titlef');
+		   $data['aridiusfastorder_status'] = $this->config->get('aridiusfastorder_status');
+			]]></add>
+		</operation>		
+  </file>
+</modification>

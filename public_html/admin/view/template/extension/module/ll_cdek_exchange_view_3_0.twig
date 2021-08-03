@@ -1,0 +1,226 @@
+{#
+/**
+ * @author    p0v1n0m <support@lutylab.ru>
+ * @license   Commercial
+ * @link      https://lutylab.ru
+ */
+#}
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        {% if order.status_id not in [0, 2] %}
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li><a href="{{ order.update }}"><span class="text-primary"><i class="fa fa-refresh fa-fw"></i> {{ button_update }}</span></a></li>
+            <li><a href="{{ order.invoice }}" target="_blank"><span class="text-primary"><i class="fa fa-print fa-fw"></i> {{ button_invoice }}</span></a></li>
+            <li><a href="{{ order.sticker }}" target="_blank"><span class="text-primary"><i class="fa fa-sticky-note-o fa-fw"></i> {{ button_sticker }}</span></a></li>
+            {% if ll_invoice %}
+              <li><a href="{{ order.torg }}" target="_blank"><span class="text-primary"><i class="fa fa-barcode fa-fw"></i> {{ button_torg }}</span></a></li>
+            {% else %}
+              <li class="disabled"><a><span class="text-primary"><i class="fa fa-barcode fa-fw"></i> {{ button_torg }}</span></a></li>
+            {% endif %}
+            <li><a href="{{ order.email }}"><span class="text-primary"><i class="fa fa-envelope-o fa-fw"></i> {{ button_email }}</span></a></li>
+            <li><a href="{{ order.courier }}"><span class="text-primary"><i class="fa fa-calendar fa-fw"></i> {{ button_courier }}</span></a></li>
+            <li class="hidden"><a href="{{ order.call }}"><span class="text-primary"><i class="fa fa-phone fa-fw"></i> {{ button_call }}</span></a></li>
+            <li><a style="cursor: pointer;" onclick="confirm('{{ text_clean_confirm }}') ? location = '{{ order.remove }}' : false;"><span class="text-warning"><i class="fa fa-eraser fa-fw"></i> {{ button_delete }}</span></a></li>
+            <li><a style="cursor: pointer;" onclick="confirm('{{ text_remove_confirm }}') ? location = '{{ order.remove_db }}' : false;"><span class="text-danger"><i class="fa fa-times fa-fw"></i> {{ button_delete_db }}</span></a></li>
+          </ul>
+        </div>
+        {% endif %}
+        <a href="{{ shipping }}" data-toggle="tooltip" title="{{ button_shipping }}" class="btn btn-default"><i class="fa fa-truck"></i></a>
+        <a href="{{ exchange }}" data-toggle="tooltip" title="{{ button_exchange }}" class="btn btn-default"><i class="fa fa-exchange"></i></a>
+        <a href="{{ orders }}" data-toggle="tooltip" title="{{ button_order }}" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
+      <h1>{{ heading_title_view }}</h1>
+      <ol class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Заказ</h3>
+          </div>
+          <table class="table">
+            <tbody>
+              <tr>
+                <td style="width: 30%;">Номер заказа</td>
+                <td><a href="{{ order.order_link }}" target="_blank">{{ order.order_id }}</a></td>
+              </tr>
+              <tr>
+                <td>Номер заказа при отправлении</td>
+                <td>{{ order.order_number }}</td>
+              </tr>
+              <tr>
+                <td>Номер заказа в СДЭК</td>
+                <td>
+                  <div class="input-group input-group-sm" data-toggle="tooltip" title="Изменяйте только если по какой-то причине номер заказа СДЭК изменился и вы не можете обновить статусы.">
+                    <input type="text" name="dispatch_number" value="{{ order.dispatch_number }}" class="form-control" />
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-warning" id="change_dispatch_number"><i class="fa fa-exclamation-triangle"></i> Изменить</button>
+                    </span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Номер ТТН</td>
+                <td>{{ order.number }}</td>
+              </tr>
+              <tr>
+                <td>Тариф</td>
+                <td>{{ order.tariff }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-user"></i> Покупатель</h3>
+          </div>
+          <table class="table">
+            <tbody>
+              <tr>
+                <td style="width: 30%;">ФИО</td>
+                <td>
+                  {% if order.customer_link %}
+                    <a href="{{ order.customer_link }}" target="_blank">{{ order.customer }}</a>
+                  {% else %}
+                    {{ order.customer }}
+                  {% endif %}
+                </td>
+              </tr>
+              <tr>
+                <td>Страна</td>
+                <td>{{ order.country }}</td>
+              </tr>
+              <tr>
+                <td>Регион</td>
+                <td>{{ order.zone }}</td>
+              </tr>
+              <tr>
+                <td>Город</td>
+                <td>{{ order.city }}</td>
+              </tr>
+              <tr>
+                <td>ПВЗ/постамат</td>
+                <td>{{ order.pvz }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-calendar"></i> Статусы заказа</h3>
+          </div>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <td class="text-left">Дата</td>
+                <td class="text-left">Статус</td>
+                <td class="text-left">Комментарий</td>
+                <td class="text-left">Покупатель уведомлен</td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for history in histories %}
+              <tr>
+                <td class="text-left">{{ history.date_added }}</td>
+                <td class="text-left">{{ history.status }}</td>
+                <td class="text-left">{{ history.comment }}</td>
+                <td class="text-left">{{ history.notify }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-truck"></i> Статусы отправления</h3>
+          </div>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <td class="text-left">Дата</td>
+                <td class="text-left">Статус</td>
+                <td class="text-left">Описание</td>
+                <td class="text-left">Город</td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for status in statuses %}
+              <tr class="{{ status.color }}">
+                <td class="text-left">{{ status.date }}</td>
+                <td class="text-left">{{ status.status }}</td>
+                <td class="text-left">{{ status.description }}</td>
+                <td class="text-left">{{ status.city }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$('#change_dispatch_number').on('click', function() {
+  var dispatch_number = $('input[name=\'dispatch_number\']').val();
+
+  if (dispatch_number) {
+    $.ajax({
+      url: '{{ change_dispatch_number }}&dispatch_number=' + encodeURIComponent(dispatch_number),
+      dataType: 'json',
+      beforeSend: function() {
+        $('#change_dispatch_number').button('loading');
+      },
+      success: function(json) {
+        $('.alert').remove();
+        $('#change_dispatch_number').button('reset');
+
+        if (json['success']) {
+          $('#content > .container-fluid').prepend('<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+          $('html, body').animate({ scrollTop: 0 });
+        }
+
+        if (json['error']) {
+          $('#content > .container-fluid').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+          $('html, body').animate({ scrollTop: 0 });
+        }
+      },
+      error: function(xhr, ajaxOptions, thrownError) {
+        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+      }
+    });
+  }
+});
+</script>
+{{ footer }}
